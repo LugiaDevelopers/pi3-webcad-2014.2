@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	
 	public static Connection createConnection(){
-		
+		//test
 	       String stringDeConexao = "jdbc:mysql://localhost:3306/webcad";
 	       String usuario = "root";
 	       String senha = "1234";
