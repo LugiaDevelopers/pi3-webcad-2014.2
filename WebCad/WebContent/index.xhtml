@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<h:head>
+  <title>Webcad - Locações Online</title>
+  <link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
+ 
+ 
+  <script type="text/javascript" src="resources/js/javascript.js">
+  
+  
+  </script>
+  
+</h:head>
+
+<h:body>
+
+	<ui:include src="/topo_sair.xhtml"></ui:include>
+	
+	<h:panelGroup>
+	
+	<div class="conteudo">
+		<div class="login">
+		
+			<h3>Realize seu Login</h3>
+			
+			<h:form id="form1" prependId="false" class="form_login">
+				<div class="control-group">
+				<label class="control-label" for="imputMatricula">Email</label>
+				<div class="controls">
+				<h:inputText value="#{usuarioMB.usuario.email}" id="imputMatricula" placeholder="Matricula" />
+				</div>
+				</div>
+				
+				<div class="control-group">
+				<label class="control-label" for="inputSenha">Senha</label>
+				<div class="controls">
+					<h:inputSecret value="#{usuarioMB.usuario.senha}" id="imputSenha" placeholder="Senha"/>
+				</div>
+				</div>
+				
+				<h:commandButton value="      Acessar      " class="btn btn-success" action="#{usuarioMB.fazerLogin}"
+				onclick="return validaIndex()"/>
+			
+				
+				<br />
+				<br />
+				
+				<h:commandLink value="Cadastrar usuario coordenador" action="#{usuarioMB.cadastrarCoordenador}"/>
+			</h:form>
+		
+		</div>
+	
+	
+	</div>
+	
+	</h:panelGroup>
+	
+	
+	<ui:include src="rodape.xhtml"></ui:include>
+</h:body>
+
+</html>

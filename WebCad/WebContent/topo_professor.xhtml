@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<h:head>
+<link href="resources/css/estilo_topo.css" rel="stylesheet" type="text/css" /> 
+<link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+<link href="resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" /> 
+<link href="resources/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+<link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+
+<h:body>
+
+	<div class="topo">
+		<div class="logo_topo">
+		<img src="resources/img/webcadPequeno.fw.png" style="border: none;" />
+		</div>
+	</div>
+	
+	<div class="linha_topo"></div>
+	
+	<div class="sub_topo">
+	<ui:include src="/menu_professor.xhtml"></ui:include>
+	<ui:include src="/opcao_sair.xhtml"></ui:include>
+	</div>
+	<div class="clr"></div>
+
+</h:body>
+
+</html>

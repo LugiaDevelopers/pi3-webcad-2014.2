@@ -1,0 +1,139 @@
+@CHARSET "ISO-8859-1";
+body{
+	background-image: url("../img/fundo.gif");
+}
+
+*{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.clr{
+	clear:both;
+}
+.topo{	
+	position:relative;
+	margin:0 auto;	
+	height:125px;
+	border-radius:10px 10px 0 0; 
+	background-image: url("../img/Topo.fw.png");
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.linha_topo{
+	position: relative;
+	background-image:url("../img/linhaDoTopo.fw.png");
+	height: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.logo_topo{
+	position:relative;
+	margin: 7px 0 0 15px;
+	float: left;
+}
+.menu {
+	list-style:none;
+	float:left;
+	z-index: 5000;
+	margin-top:-10px;
+	margin-left: 0;
+}
+.menu li {
+	position:relative;
+	float:left;
+	z-index: 5000;
+	border: none;
+	background-color:#F1F1F2;
+}
+.menu li a {
+	font-size:10px;
+	font-weight:bold;
+	color:black;
+	text-decoration:none;
+	text-align:center;
+	padding:6px 6px;
+	z-index: 5000;
+	display:block;
+	border: none;
+	border-right: solid 1px white;
+}
+.menu li a:hover {
+	background-color: #E0E1E0;
+}
+.menu li ul li:hover{
+	background-color: #E0E1E0;
+}
+.menu li ul li a{
+	font-weight: normal;
+	text-align: left;
+	padding: 0px;
+	border-bottom: solid 1px #D8D8D8;
+	width: 100%;
+	background-color: black;
+}
+.menu li ul li a span{
+	position:relative;
+	float:left;
+	font-size:10px;
+	padding: 5px;
+	margin: 0;
+	width: 74%;
+}
+.menu li ul li a img{
+	position:relative;
+	float:left;
+	background-color:#D8D8D8;
+	margin: 0;
+	padding: 3px;
+	width: 17px;
+}
+.menu li ul {
+	position:absolute;
+	top:24px;
+	left:-5px;
+	z-index: 5000;
+	display:none;
+	border: none;
+	width: 150px;
+}
+.menu li:hover ul, .menu li ul li:hover ul, .menu li.over ul, .menu li ul li.over ul {
+	display:block;
+	z-index: 5000;
+	border: none;
+}
+.menu li ul li {
+	display:block;
+	border: none;
+	width:170px;
+	left:-20px;
+	z-index: 5000;
+}
+.menu li ul li ul {
+	z-index:900;
+	top:0;
+	left:140px;
+	width:100px;
+	border: none;
+	display: none;
+}
+.menu li ul li:hover  ul li{
+	display:block;
+	z-index: 5000;
+}
+.menu li ul li ul li{
+	display: none;
+	position: relative;
+	margin-left: -20px;
+}
+.sub_topo{	
+	position:relative;
+	margin-left: 10px;	
+	margin-right: 10px;
+	height:22px; 
+	background-color:#F1F1F2;
+	padding-top:10px;
+	border-bottom: solid 1px #D2D3D5;
+	border-left: solid 1px #D2D3D5;
+	border-right: solid 1px #D2D3D5;
+}

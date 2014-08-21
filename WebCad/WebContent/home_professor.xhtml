@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Webcad - Locações Online | Home Professor</title>
+	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
+</h:head>
+
+<h:body>
+
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{reservaBM.verificarReservas}" />
+	</f:metadata>
+
+	<ui:include src="/topo_professor.xhtml"></ui:include>
+
+
+	<h:panelGroup>
+
+		<div class="conteudo">
+
+
+			<div class="clr"></div>
+
+			<div class="panel panel-primary">
+
+				<h:form>
+					<div class="left_home_adm">
+
+						<h4>Usuario: #{sessionScope.usuario.email}</h4>
+
+						<div class="panel-heading">
+							<h3 class="panel-title">Principais Atividades</h3>
+						</div>
+
+						<a href="realizar_reserva.xhtml"
+							class="link-atividades-principais-home"> <img
+							src="resources/img/Calendario.png" height="55" /> <span>Realizar<br />Reserva
+						</span>
+						</a>
+
+						<div class="clr">
+
+							<h:commandButton value="Atualiza" class="btn btn-info"
+								action="#{reservaBM.verificarReservas}" />
+
+						</div>
+
+					</div>
+
+					<div class="right_home">
+
+						<h3>Reservas Realizadas</h3>
+
+						<h:dataTable id="TabelaDeEquipamentosReservados"
+							class="table bordered-table zebra-striped"
+							value="#{reservaBM.reservas}" var="reserva">
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Equipamento" />
+								</f:facet>
+								<h:outputText
+									value="#{reserva.equipamento.tipoEquipamento.nome}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Numero de serie" />
+								</f:facet>
+								<h:outputText value="#{reserva.equipamento.numeroDeSerie}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Data" />
+								</f:facet>
+								<h:outputText value="#{reserva.data}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Ação" />
+								</f:facet>
+								<!--  <h:commandButton value="Editar" class="btn btn-info" /> -->
+								<h:commandButton value="Cancelar" class="btn btn-danger"
+									action="#{reservaBM.desistirDaReserva(reserva.id)}" />
+							</h:column>
+
+
+						</h:dataTable>
+
+
+
+					</div>
+				</h:form>
+				<div class="clr"></div>
+
+
+			</div>
+
+
+
+		</div>
+
+
+	</h:panelGroup>
+
+	<ui:include src="rodape.xhtml"></ui:include>
+</h:body>
+
+
+
+</html>

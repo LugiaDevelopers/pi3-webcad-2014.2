@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Webcad - Locações Online</title>
+	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+
+<h:body>
+
+	<ui:include src="/topo_administrador.xhtml"></ui:include>
+	<h:panelGroup>
+
+		<div class="conteudo">
+
+
+			<div class="clr"></div>
+
+			<div class="panel panel-primary">
+
+				<h4 class="panel-title">Cadastrar Tipo de Equipamento</h4>
+
+
+				<div class="left_home_adm">
+
+					<h:form>
+						<label>Tipo de Equipamento</label>
+						<h:inputText value="#{equipamentoBM.tipoEquipamento.nome}" id="tipoEquipamento" />
+						
+						<br />
+						<h:commandButton class="btn btn-success" value="Cadastrar" action="#{equipamentoBM.cadastraTipo}" />
+					</h:form>
+				</div>
+
+				<div class="right_home">
+
+					<h:dataTable id="tabelaDeTipoDeCursosCadastrados"
+						class="table bordered-table zebra-striped"
+						value="#{equipamentoBM.tipoEquipamentos}"
+						var="equipamento" >
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Tipo do Equipamento" />
+							</f:facet>
+							<h:outputText value="#{equipamento.nome}" />
+						</h:column>
+
+						
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<h:commandButton value="Editar" class="btn btn-info" />
+							<h:commandButton value="Inativar" class="btn btn-danger" />
+						</h:column>
+
+
+					</h:dataTable>
+
+
+
+				</div>
+
+				<div class="clr"></div>
+
+
+			</div>
+
+
+
+		</div>
+
+
+	</h:panelGroup>
+
+	<ui:include src="rodape.xhtml"></ui:include>
+</h:body>
+
+</html>

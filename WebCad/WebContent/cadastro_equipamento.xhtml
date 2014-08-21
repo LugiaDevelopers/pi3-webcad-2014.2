@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Webcad - Locações Online</title>
+	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+
+<h:body>
+
+	<ui:include src="/topo_administrador.xhtml"></ui:include>
+	<h:panelGroup>
+
+		<div class="conteudo">
+
+
+			<div class="clr"></div>
+
+			<div class="panel panel-primary">
+
+				<h4 class="panel-title">Cadastro de Equipamentos</h4>
+
+
+				<div class="left_home_adm">
+
+					<h:form>
+						<label>Tipo do Equipamento</label>
+						
+						
+						<h:selectOneMenu id="tipoEquipamento"  value="#{equipamentoBM.tipoEquipamento.nome}">  
+  						 <f:selectItems value="#{equipamentoBM.tipoEquipamentos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" /> 
+						</h:selectOneMenu>
+						
+						<label>Descrição do Equipamento</label>
+						<h:inputText value="#{equipamentoBM.equipamento.descricao}" id="descricaoEquipamento" />
+						<label>N° de série</label>
+						<h:inputText value="#{equipamentoBM.equipamento.numeroDeSerie}" id="numeroSerie" />
+						<label>N° de tombamento</label>
+						<h:inputText value="#{equipamentoBM.equipamento.numeroTombamento}" id="numeroTombamento" />
+						<br />
+						<h:commandButton class="btn btn-success" value="Cadastrar" action="#{equipamentoBM.salvar}"/>
+					</h:form>
+				
+				</div>
+
+				<div class="right_home">
+
+					<h:dataTable id="TabelaDeEquipamentosCadastrados"
+						class="table bordered-table zebra-striped"
+						value="#{equipamentoBM.equipamentos}"
+						var="equipamento">
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Equipamento" />
+							</f:facet>
+							<h:outputText value="#{equipamento.tipoEquipamento.nome}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Quantidade" />
+							</f:facet>
+							<h:outputText value="" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<h:form>
+								<h:commandButton value="Editar" class="btn btn-info" action="#{equipamentoBM.editar(equipamento)}"/>
+								<h:commandButton value="Inativar" class="btn btn-danger" action="#{equipamentoBM.desabilitar(equipamento)}"/>
+							</h:form>
+						</h:column>
+
+
+					</h:dataTable>
+
+
+
+				</div>
+
+				<div class="clr"></div>
+
+
+			</div>
+
+
+
+		</div>
+
+
+	</h:panelGroup>
+
+	<ui:include src="rodape.xhtml"></ui:include>
+</h:body>
+
+</html>

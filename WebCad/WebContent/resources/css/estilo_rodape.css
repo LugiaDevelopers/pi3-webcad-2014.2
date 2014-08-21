@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+.rodape{
+	position: relative;
+	margin: 0px;
+	color: #666666;
+	margin-top: 10px;
+	padding-top: 5px;
+	text-align: center;
+	font-size: 12px;
+}
+
+.clr{
+	clear:both;
+}
+*{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Realizar Reserva | Professor</title>
+	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
+
+</h:head>
+
+<h:body>
+
+
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{reservaBM.listaLimpa}" />
+	</f:metadata>
+	<ui:include src="/topo_professor.xhtml"></ui:include>
+
+	<h:panelGroup>
+
+		<div class="conteudo">
+
+
+			<div class="clr"></div>
+
+			<div class="panel panel-primary">
+
+				<h4 class="panel-title">Realizar Reserva</h4>
+				<h4>Usuario: #{sessionScope.usuario.email}</h4>
+				<h:form>
+					<div class="left_home_adm">
+
+
+						<label>Equipamento</label>
+						<h:selectOneMenu id="tipoEquipamento"
+							value="#{equipamentoBM.tipoEquipamento.nome}">
+							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
+								var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
+						</h:selectOneMenu>
+						<label>Curso</label>
+						<h:selectOneMenu id="tipoCurso" value="#{cursoBean.curso.id}">
+
+							<f:selectItems value="#{cursoBean.cursos}" var="curso"
+								itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+
+						</h:selectOneMenu>
+
+<br />
+						
+
+						
+						<label>Data da reserva </label>	
+							<p:calendar id="mask" value="#{reservaBM.data1}"
+								pattern="dd/MM/yyyy" mask="true" />
+						
+										
+						
+						
+						<br />
+						<h:commandButton class="btn btn-success" value="Buscar"
+							action="#{reservaBM.buscarEquipamentosDisponiveis(equipamentoBM.tipoEquipamento.nome,cursoBean.curso.id,reservaBM.data1)}" />
+
+					</div>
+
+
+
+					<h:dataTable id="TabelaDedisponiveis"
+						class="table bordered-table zebra-striped"
+						value="#{reservaBM.reservas}" var="reserva">
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Equipamento" />
+							</f:facet>
+							<h:outputText
+								value="#{reserva.equipamento.tipoEquipamento.nome} - #{reserva.equipamento.descricao}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Numero de Serie" />
+							</f:facet>
+							<h:outputText value="#{reserva.equipamento.numeroDeSerie}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Numero de Tombamento" />
+							</f:facet>
+							<h:outputText value="#{reserva.equipamento.numeroTombamento} " />
+						</h:column>
+
+						
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<h:commandButton value="Reservar" class="btn btn-success"
+								action="#{reservaBM.efetuarReserva(reserva.equipamento.id, equipamentoBM.tipoEquipamento.nome, reservaBM.data1)}" />
+
+						</h:column>
+
+
+					</h:dataTable>
+
+				</h:form>
+			</div>
+
+		</div>
+
+	</h:panelGroup>
+
+	<ui:include src="/rodape.xhtml"></ui:include>
+</h:body>
+
+</html>

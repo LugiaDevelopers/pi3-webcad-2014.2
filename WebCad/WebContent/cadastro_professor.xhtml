@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Webcad - Locações Online</title>
+	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="resources/js/javascript.js">
+  
+  
+  </script>
+
+</h:head>
+
+<h:body>
+
+	<ui:include src="/topo_administrador.xhtml"></ui:include>
+	<h:panelGroup>
+
+		<div class="conteudo">
+
+
+			<div class="clr"></div>
+
+			<div class="panel panel-primary">
+
+				<h4 class="panel-title">Cadastro de Professores</h4>
+
+
+				<div class="left_home_adm">
+
+					<h:form id="formProf" prependId="false">
+						<label>Nome</label>
+						<h:inputText id="nomeProfessor" value="#{professorBean.professor.nome}" />
+						<label>Matricula</label>
+						<h:inputText id="matriculaProfessor" value="#{professorBean.professor.matricula}"/>
+						<label>E-mail</label>
+						<h:inputText id="emailProfessor" value="#{professorBean.professor.email}"/>
+						<label>Senha</label>
+						<h:inputText id="senhaProfessor" value="#{professorBean.professor.senha}"/>
+						<br />
+						<h:commandButton class="btn btn-success" value="Cadastrar" action="#{professorBean.salvar}"
+						onclick="return validaProfessor()"/>
+					</h:form>
+				</div>
+
+				<div class="right_home">
+
+					<h:dataTable id="TabelaDeProfessoresCadastrados"
+						class="table bordered-table zebra-striped"
+						value="#{professorBean.professores}"
+						var="professor" >
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							<h:outputText value="#{professor.nome}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Matricula" />
+							</f:facet>
+							<h:outputText value="#{professor.matricula}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="E-mail" />
+							</f:facet>
+							<h:outputText value="#{professor.email}" />
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<h:form>
+								<h:commandButton value="Editar" class="btn btn-info" action="#{professorBean.editar(professor)}" />
+								<h:commandButton value="Inativar" class="btn btn-danger" action="#{professorBean.desabilitar(professor)}" />
+							</h:form>
+						</h:column>
+
+
+					</h:dataTable>
+
+
+
+				</div>
+
+				<div class="clr"></div>
+
+
+			</div>
+
+
+
+		</div>
+
+
+	</h:panelGroup>
+
+	<ui:include src="rodape.xhtml"></ui:include>
+</h:body>
+
+</html>
