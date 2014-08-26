@@ -33,7 +33,7 @@
 						<h:inputText value="#{equipamentoBM.tipoEquipamento.nome}" id="tipoEquipamento" />
 						
 						<br />
-						<h:commandButton class="btn btn-success" value="Cadastrar" action="#{equipamentoBM.cadastraTipo}" />
+						<h:commandButton class="btn btn-success" value="Salvar" action="#{equipamentoBM.cadastraTipo}" />
 					</h:form>
 				</div>
 
@@ -57,7 +57,7 @@
 							<f:facet name="header">
 								<h:outputText value="Ação" />
 							</f:facet>
-							<h:commandButton value="Editar" class="btn btn-info" />
+							<h:commandButton value="Editar" class="btn btn-info" actionListener="#{equipamentoBM.editar(equipamento)}"/>
 							<h:commandButton value="Inativar" class="btn btn-danger" />
 						</h:column>
 
