@@ -30,30 +30,35 @@
 
 					<h:form>
 						<label>Tipo do Equipamento</label>
-						
-						
-						<h:selectOneMenu id="tipoEquipamento"  value="#{equipamentoBM.tipoEquipamento.nome}">  
-  						 <f:selectItems value="#{equipamentoBM.tipoEquipamentos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" /> 
+
+
+						<h:selectOneMenu id="tipoEquipamento"
+							value="#{equipamentoBM.tipoEquipamento.nome}">
+							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
+								var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
 						</h:selectOneMenu>
-						
+
 						<label>Descrição do Equipamento</label>
-						<h:inputText value="#{equipamentoBM.equipamento.descricao}" id="descricaoEquipamento" />
+						<h:inputText value="#{equipamentoBM.equipamento.descricao}"
+							id="descricaoEquipamento" />
 						<label>N° de série</label>
-						<h:inputText value="#{equipamentoBM.equipamento.numeroDeSerie}" id="numeroSerie" />
+						<h:inputText value="#{equipamentoBM.equipamento.numeroDeSerie}"
+							id="numeroSerie" />
 						<label>N° de tombamento</label>
-						<h:inputText value="#{equipamentoBM.equipamento.numeroTombamento}" id="numeroTombamento" />
+						<h:inputText value="#{equipamentoBM.equipamento.numeroTombamento}"
+							id="numeroTombamento" />
 						<br />
-						<h:commandButton class="btn btn-success" value="Cadastrar" action="#{equipamentoBM.salvar}"/>
+						<h:commandButton class="btn btn-success" value="Cadastrar"
+							action="#{equipamentoBM.salvar}" />
 					</h:form>
-				
+
 				</div>
 
-				<div class="right_home">
+			<div class="right_home">
 
 					<h:dataTable id="TabelaDeEquipamentosCadastrados"
 						class="table bordered-table zebra-striped"
-						value="#{equipamentoBM.equipamentos}"
-						var="equipamento">
+						value="#{equipamentoBM.equipamentos}" var="equipamento">
 
 						<h:column>
 							<f:facet name="header">
@@ -64,18 +69,29 @@
 
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Quantidade" />
+								<h:outputText value="N° de Série" />
 							</f:facet>
-							<h:outputText value="" />
+							<h:outputText value="#{equipamento.numeroDeSerie}" />
 						</h:column>
+
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{equipamento.descricao}" />
+						</h:column>
+
+
 
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Ação" />
 							</f:facet>
 							<h:form>
-								<h:commandButton value="Editar" class="btn btn-info" action="#{equipamentoBM.editar(equipamento)}"/>
-								<h:commandButton value="Inativar" class="btn btn-danger" action="#{equipamentoBM.desabilitar(equipamento)}"/>
+								<h:commandButton value="Editar" class="btn btn-info"
+									action="#{equipamentoBM.editar(equipamento)}" />
+								<h:commandButton value="Inativar" class="btn btn-danger"
+									action="#{equipamentoBM.desabilitar(equipamento)}" />
 							</h:form>
 						</h:column>
 
@@ -93,7 +109,7 @@
 
 
 
-		</div>
+	  	</div>
 
 
 	</h:panelGroup>
