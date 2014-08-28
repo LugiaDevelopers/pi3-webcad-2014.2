@@ -53,7 +53,7 @@ public interface IFachada {
 
 	public abstract ArrayList<Equipamento> buscarEquipamento(String nomeEquip);
 
-	public abstract String manutencao(ArrayList<Equipamento> equipManutencao);
+	public abstract String manutencao(Equipamento equipManutencao);
 
 	public abstract void triagem(int quantidade,TipoEquipamento tipoequipamento, Curso curso);
 	

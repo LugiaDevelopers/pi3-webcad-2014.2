@@ -12,7 +12,7 @@ public interface IRepositorioEquipamento {
 	public abstract void editar(Equipamento equip);
 	public abstract void desabilitar(Equipamento equip);
 	public abstract ArrayList<Equipamento> buscarEquipamento(String nomeEquip);
-	public abstract String manutencao(ArrayList<Equipamento> equipManutencao);
+	public abstract String manutencao(Equipamento equipManutencao);
 	public abstract void triagem(int quantidade, TipoEquipamento tipoequipamento, Curso curso);
 	public abstract ArrayList<Equipamento> listar();
 	public abstract ArrayList<TipoEquipamento> listarTipos();

@@ -175,3 +175,26 @@
 	width: 45%;
 	margin-top: 10px;
 }
+
+.left_table{
+	top:54.7%;
+	width: 48%;
+	
+	border-bottom: solid 1px #D2D3D5;
+	border-top: solid 1px #D2D3D5;
+	border-left: solid 1px #D2D3D5;
+	border-right: solid 1px #D2D3D5;
+	border-radius: 0 0 10px 10px;
+}
+
+.right_table{
+	left:50.7%;
+	top:54.7%;
+	border-bottom: solid 1px #D2D3D5;
+	border-top: solid 1px #D2D3D5;
+	border-left: solid 1px #D2D3D5;
+	border-right: solid 1px #D2D3D5;
+	border-radius: 0 0 10px 10px;
+	width: 48%;
+
+}

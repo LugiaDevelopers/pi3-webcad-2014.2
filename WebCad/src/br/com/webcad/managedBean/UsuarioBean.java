@@ -1,4 +1,5 @@
 package br.com.webcad.managedBean;
+
 import java.util.ArrayList;
 
 import javax.faces.application.FacesMessage;
@@ -20,8 +21,9 @@ public class UsuarioBean {
 
 	private Usuario usuario;
 	private IFachada fachada;
-	
-	public UsuarioBean(){
+	private boolean verificaUsuarioLogado = false;
+
+	public UsuarioBean() {
 		usuario = new Usuario();
 		fachada = Fachada.getInstancia();
 	}
@@ -33,49 +35,58 @@ public class UsuarioBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	public String fazerLogin(){
+
+	public String fazerLogin() {
 		FacesContext fc = FacesContext.getCurrentInstance();
-		if(fachada.fazerLogin(usuario.getEmail(), usuario.getSenha()) == true){
-			
+		if (fachada.fazerLogin(usuario.getEmail(), usuario.getSenha()) == true) {
+			verificaUsuarioLogado = true;
 			ExternalContext ec = fc.getExternalContext();
 			HttpSession session = (HttpSession) ec.getSession(false);
 			session.setAttribute("usuario", this.usuario);
-			
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("email", usuario.getEmail());
+
+			FacesContext.getCurrentInstance().getExternalContext()
+					.getSessionMap().put("email", usuario.getEmail());
 			return "/home_professor?faces-redirect=true";
-			
-		}else if(fachada.fazerLoginAdministrador(usuario.getEmail(), usuario.getSenha()) == true){
+
+		} else if (fachada.fazerLoginAdministrador(usuario.getEmail(),
+				usuario.getSenha()) == true) {
+			verificaUsuarioLogado = true;
 			return "home_administrador";
-		}else if(fachada.fazerLoginCordenador(usuario.getEmail(), usuario.getSenha()) == true){
+		} else if (fachada.fazerLoginCordenador(usuario.getEmail(),
+				usuario.getSenha()) == true) {
+			verificaUsuarioLogado = true;
 			return "home_cordenador";
-		}else{
+		} else {
 			FacesMessage fm = new FacesMessage("usuário e/ou senha inválidos");
 			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
 			fc.addMessage(null, fm);
 			fc.getExternalContext().getFlash().setKeepMessages(true);
 			return "/index?faces-redirect=true";
 		}
-		
-		
-		
-		
-		
+
 	}
-	
-	
+
 	public String registraSaida() {
-				FacesContext fc = FacesContext.getCurrentInstance();
+		FacesContext fc = FacesContext.getCurrentInstance();
 		ExternalContext ec = fc.getExternalContext();
 		HttpSession session = (HttpSession) ec.getSession(false);
 		session.removeAttribute("usuario");
 		return "/home_professor?faces-redirect=true";
 	}
-	
-	
-	
-	public void cadastrarCoordenador(){
+
+	public void cadastrarCoordenador() {
 		System.out.println("entrou no bean");
 		fachada.cadastrarCoordenador();
+	}
+
+	public String verificaUsuarioLogado() {
+		String caminho = null;
+		if(verificaUsuarioLogado == false){
+			
+			caminho = "/index";
+			
+		}
+		return caminho;
+		
 	}
 }

@@ -23,6 +23,12 @@ public class EquipamentoBean {
 	private ArrayList<Equipamento> equipamentosDisponiveis;
 	private ArrayList<Equipamento> equipamentosAlocados;
 
+	private ArrayList<Equipamento> equipamentosFuncionando;
+	private ArrayList<Equipamento> equipamentosQuebrados;
+
+	private ArrayList<Equipamento> equipamentosPorNome;
+	private boolean start = false;
+
 	private int chaveControleQuantidadeAlocada = 0;
 
 	public EquipamentoBean() {
@@ -60,12 +66,11 @@ public class EquipamentoBean {
 	// aqui!
 	public ArrayList<TipoEquipamento> getTipoEquipamentos() {
 		if (chaveControleQuantidadeAlocada == 0) {
-			
+
 			return fachada.listarTipos();
 		} else {
 			return tipoEquipamentos;
 		}
-		
 
 	}
 
@@ -90,6 +95,46 @@ public class EquipamentoBean {
 	public void setEquipamentosAlocados(
 			ArrayList<Equipamento> equipamentosAlocados) {
 		this.equipamentosAlocados = equipamentosAlocados;
+	}
+
+	// preencher as listas de manutenção de equipamentos!
+	public ArrayList<Equipamento> getEquipamentosFuncionando() {
+		ArrayList<Equipamento> equipamentosFuncionando = new ArrayList<Equipamento>();
+
+		if (start == true) {
+			for (int i = 0; i < equipamentosPorNome.size(); i++) {
+				if (equipamentosPorNome.get(i).isManutencao() != true) {
+					equipamentosFuncionando.add(equipamentosPorNome.get(i));
+				}
+			}
+
+			return equipamentosFuncionando;
+		} else {
+			return null;
+		}
+
+	}
+
+	public ArrayList<Equipamento> getEquipamentosQuebrados() {
+		ArrayList<Equipamento> equipamentosQuebrados = new ArrayList<Equipamento>();
+
+		if (start == true) {
+			for (int i = 0; i < equipamentosPorNome.size(); i++) {
+				System.out.println("Quebrado "
+						+ equipamentosPorNome.get(i).getTipoEquipamento()
+								.getNome());
+				if (equipamentosPorNome.get(i).isManutencao() != false) {
+					equipamentosQuebrados.add(equipamentosPorNome.get(i));
+
+				}
+
+			}
+
+			return equipamentosQuebrados;
+		} else {
+			return null;
+		}
+
 	}
 
 	public String salvar() {
@@ -153,19 +198,23 @@ public class EquipamentoBean {
 		System.out.println("entrou e o id é " + idCurso + " blablabla");
 		equipamentosAlocados = fachada.equipamentosAlocados(idCurso);
 		tipoEquipamentos = fachada.listarTipos();
-		
+
 		equipamentos = null;
 		return "triagem_equipamento";
 
 	}
 
-	public String alocarEquipamento(int idCurso, String nomeEquip, boolean alocado) {
-	System.out.println("entrou n"+alocado);	
+	public String alocarEquipamento(int idCurso, String nomeEquip,
+			boolean alocado) {
+		System.out.println("entrou n" + alocado);
 		equipamentos = fachada.listarEquipamentos();
-		if(alocado== false){
+		if (alocado == false) {
 			for (int i = 0; i < equipamentos.size(); i++) {
-				if(equipamentos.get(i).getTipoEquipamento().getNome().equals(nomeEquip)&&equipamentos.get(i).isDisponivelParaLocacao()== true){
-					fachada.alocarEquipamento(idCurso, equipamentos.get(i).getId(), alocado);
+				if (equipamentos.get(i).getTipoEquipamento().getNome()
+						.equals(nomeEquip)
+						&& equipamentos.get(i).isDisponivelParaLocacao() == true) {
+					fachada.alocarEquipamento(idCurso, equipamentos.get(i)
+							.getId(), alocado);
 					equipamentosAlocados(idCurso);
 					equipamentos = null;
 					break;
@@ -173,15 +222,18 @@ public class EquipamentoBean {
 			}
 
 		}
-		
-		System.out.println("entrou n0"+alocado);
-		if(alocado != false){
+
+		System.out.println("entrou n0" + alocado);
+		if (alocado != false) {
 			System.out.println("entrou n1");
 			for (int i = 0; i < equipamentos.size(); i++) {
 				System.out.println("entrou n2");
-				if(equipamentos.get(i).getTipoEquipamento().getNome().equals(nomeEquip)&&equipamentos.get(i).isDisponivelParaLocacao()!= true){
+				if (equipamentos.get(i).getTipoEquipamento().getNome()
+						.equals(nomeEquip)
+						&& equipamentos.get(i).isDisponivelParaLocacao() != true) {
 					System.out.println("entrou n3");
-					fachada.alocarEquipamento(0, equipamentos.get(i).getId(), alocado);
+					fachada.alocarEquipamento(0, equipamentos.get(i).getId(),
+							alocado);
 					equipamentosAlocados(idCurso);
 					equipamentos = null;
 					break;
@@ -192,4 +244,27 @@ public class EquipamentoBean {
 		return "triagem_equipamento";
 	}
 
+	public void manutencao(Equipamento equip) {
+		fachada.manutencao(equip);
+		filtrarEquipamentos();
+		
+	}
+
+	public void filtrarEquipamentos() {
+
+		equipamentosPorNome = new ArrayList<Equipamento>();
+		ArrayList<Equipamento> todosEquipamentos = new ArrayList<Equipamento>();
+
+		todosEquipamentos = fachada.listarEquipamentos();
+
+		for (int i = 0; i < todosEquipamentos.size(); i++) {
+			if (todosEquipamentos.get(i).getTipoEquipamento().getNome()
+					.equals(tipoEquipamento.getNome())) {
+				equipamentosPorNome.add(todosEquipamentos.get(i));
+			}
+		}
+		start=true;
+		System.err.println("entrou " + tipoEquipamento.getNome() + " "
+				+ equipamentosPorNome.size());
+	}
 }

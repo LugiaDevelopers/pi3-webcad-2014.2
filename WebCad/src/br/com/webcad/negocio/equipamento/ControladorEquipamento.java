@@ -54,7 +54,7 @@ public class ControladorEquipamento {
 		return null;
 	}
 
-	public String equipamentoManutencao(ArrayList<Equipamento> equipManutencao) {
+	public String equipamentoManutencao(Equipamento equipManutencao) {
 		return repositorioEquipamento.manutencao(equipManutencao);
 	}
 

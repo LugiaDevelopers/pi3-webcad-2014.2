@@ -174,7 +174,7 @@ public class Fachada implements IFachada{
 	}
 
 	@Override
-	public String manutencao(ArrayList<Equipamento> equipManutencao) {
+	public String manutencao(Equipamento equipManutencao) {
 		return this.controladorEquipamento.equipamentoManutencao(equipManutencao);
 	}
 

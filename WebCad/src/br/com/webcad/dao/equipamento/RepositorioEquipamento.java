@@ -129,21 +129,23 @@ public class RepositorioEquipamento implements IRepositorioEquipamento {
 	}
 
 	@Override
-	public String manutencao(ArrayList<Equipamento> equipManutencao) {
+	public String manutencao(Equipamento equipManutencao) {
 		try {
 			Connection conexao = ConnectionFactory.createConnection();
-			// eventuais alterações poderam ser feitas nesse sql apos falar com
-			// o dba!!!!
-			for (int i = 0; i < equipManutencao.size(); i++) {
-				String sql = "update equipamento set Manutencao = "
-						+ equipManutencao.get(i).isAtivo()
-						+ " where Id_equip = " + equipManutencao.get(i).getId()
-						+ ";";
 
-				PreparedStatement comando = conexao.prepareStatement(sql);
+			String sql;
 
-				comando.execute();
+			if (equipManutencao.isManutencao() == false) {
+				sql = "update equipamento set manutencao = true where id_equip = "
+						+ equipManutencao.getId() + "; ";
+			} else {
+				sql = "update equipamento set manutencao = false where id_equip = "
+						+ equipManutencao.getId() + "; ";
 			}
+
+			PreparedStatement comando = conexao.prepareStatement(sql);
+
+			comando.execute();
 
 			conexao.close();
 
@@ -271,16 +273,16 @@ public class RepositorioEquipamento implements IRepositorioEquipamento {
 		return aux;
 	}
 
-	private int quantidadeAlocada(String nome){
+	private int quantidadeAlocada(String nome) {
 		int aux = 0;
-		if(tipoEquipamento == null){
+		if (tipoEquipamento == null) {
 			return 0;
-		}else{	
-		for (int i = 0; i < tipoEquipamento.size(); i++) {
-			if(tipoEquipamento.get(i).getNome().equals(nome)){
-				aux++;
+		} else {
+			for (int i = 0; i < tipoEquipamento.size(); i++) {
+				if (tipoEquipamento.get(i).getNome().equals(nome)) {
+					aux++;
+				}
 			}
-		}
 		}
 		return aux;
 	}
@@ -413,7 +415,6 @@ public class RepositorioEquipamento implements IRepositorioEquipamento {
 
 	}
 
-	//chamadas para reserva de equipamento!
-	
-	
+	// chamadas para reserva de equipamento!
+
 }
