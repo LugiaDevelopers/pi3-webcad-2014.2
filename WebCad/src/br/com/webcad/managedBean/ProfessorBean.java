@@ -73,6 +73,7 @@ public void desabilitar(Professor professor) {
 		fachada.cadastrar(professor);
 
 		professores = null;
+		professor = null;
 		professor = new Professor();
 
 	}

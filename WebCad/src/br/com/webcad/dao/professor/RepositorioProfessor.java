@@ -87,13 +87,18 @@ public class RepositorioProfessor implements IRepositorioProfessor {
 		try {
 			Connection conexao = ConnectionFactory.createConnection();
 
-			String sql = "update usuario set Ativo = false where Id_user = "
-					+ prof.getId() + ";";
+			String sql = "delete from professor where id_user = "+prof.getId()+";";
 
 			PreparedStatement comando = conexao.prepareStatement(sql);
 
 			comando.execute();
 
+			sql = "delete from usuario where id_user = "+prof.getId()+";";
+			
+			comando = conexao.prepareStatement(sql);
+			
+			comando.execute();
+			
 			conexao.close();
 
 		} catch (Exception e) {
