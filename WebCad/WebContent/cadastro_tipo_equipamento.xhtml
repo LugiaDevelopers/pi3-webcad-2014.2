@@ -30,10 +30,10 @@
 
 					<h:form>
 						<label>Tipo de Equipamento</label>
-						<h:inputText value="#{equipamentoBM.tipoEquipamento.nome}" id="tipoEquipamento" />
+						<h:inputText value="#{tipoEquipamentoMB.tipoEquipamento.nome}" id="tipoEquipamento" />
 						
 						<br />
-						<h:commandButton class="btn btn-success" value="Salvar" action="#{equipamentoBM.cadastraTipo}" />
+						<h:commandButton class="btn btn-success" value="Salvar" action="#{tipoEquipamentoMB.salvar}" />
 					</h:form>
 				</div>
 
@@ -41,7 +41,7 @@
 
 					<h:dataTable id="tabelaDeTipoDeCursosCadastrados"
 						class="table bordered-table zebra-striped"
-						value="#{equipamentoBM.tipoEquipamentos}"
+						value="#{tipoEquipamentoMB.tipoEquipamentos}"
 						var="equipamento" >
 
 						<h:column>
@@ -57,8 +57,10 @@
 							<f:facet name="header">
 								<h:outputText value="Ação" />
 							</f:facet>
-							<h:commandButton value="Editar" class="btn btn-info" actionListener="#{equipamentoBM.editar(equipamento)}"/>
-							<h:commandButton value="Inativar" class="btn btn-danger" />
+							<h:form>
+								<h:commandButton value="Editar" class="btn btn-info" action="#{tipoEquipamentoMB.editar(equipamento)}" />
+								<h:commandButton value="Excluir" class="btn btn-danger" action="#{tipoEquipamentoMB.excluir(equipamento)}"/>
+							</h:form>	
 						</h:column>
 
 

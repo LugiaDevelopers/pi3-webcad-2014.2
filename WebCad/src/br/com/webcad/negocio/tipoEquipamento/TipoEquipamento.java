@@ -1,4 +1,4 @@
-package br.com.webcad.negocio.equipamento;
+package br.com.webcad.negocio.tipoEquipamento;
 
 public class TipoEquipamento {
 

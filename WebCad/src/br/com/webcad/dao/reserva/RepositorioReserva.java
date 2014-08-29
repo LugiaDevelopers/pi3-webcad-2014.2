@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import br.com.webcad.dao.ConnectionFactory;
 import br.com.webcad.negocio.equipamento.Equipamento;
-import br.com.webcad.negocio.equipamento.TipoEquipamento;
 import br.com.webcad.negocio.reserva.Reserva;
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
 
 public class RepositorioReserva implements IRepositorioReserva{
 

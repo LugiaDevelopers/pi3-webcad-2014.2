@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.com.webcad.dao.equipamento.IRepositorioEquipamento;
 import br.com.webcad.dao.equipamento.RepositorioEquipamento;
 import br.com.webcad.negocio.curso.Curso;
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
 
 public class ControladorEquipamento {
 

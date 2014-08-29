@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import br.com.webcad.negocio.Fachada;
 import br.com.webcad.negocio.IFachada;
 import br.com.webcad.negocio.equipamento.Equipamento;
-import br.com.webcad.negocio.equipamento.TipoEquipamento;
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
 
 @ManagedBean(name = "equipamentoBM")
 @SessionScoped

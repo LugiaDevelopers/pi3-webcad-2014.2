@@ -11,11 +11,12 @@ import br.com.webcad.negocio.curso.ControladorCurso;
 import br.com.webcad.negocio.curso.Curso;
 import br.com.webcad.negocio.equipamento.ControladorEquipamento;
 import br.com.webcad.negocio.equipamento.Equipamento;
-import br.com.webcad.negocio.equipamento.TipoEquipamento;
 import br.com.webcad.negocio.professor.ControladorProfessor;
 import br.com.webcad.negocio.professor.Professor;
 import br.com.webcad.negocio.reserva.ControladorReserva;
 import br.com.webcad.negocio.reserva.Reserva;
+import br.com.webcad.negocio.tipoEquipamento.ControladorTipoEquipamento;
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
 import br.com.webcad.negocio.usuario.ControladorUsuario;
 
 public class Fachada implements IFachada{
@@ -28,7 +29,8 @@ public class Fachada implements IFachada{
 	private ControladorAdministrador controladorAdmnistrador;
 	private ControladorEquipamento controladorEquipamento;
 	private ControladorCurso controladorCurso;
-
+	private ControladorTipoEquipamento controladorTipoEquipamento;
+	
 	
 	public Fachada() {
 		this.controladorUsuario = new ControladorUsuario();
@@ -38,6 +40,7 @@ public class Fachada implements IFachada{
 		this.controladorCurso = new ControladorCurso();
 		this.controladorEquipamento = new ControladorEquipamento();
 		this.controladorReserva = new ControladorReserva();
+		this.controladorTipoEquipamento = new ControladorTipoEquipamento();
 	}
 	
 	public static IFachada getInstancia(){
@@ -302,6 +305,33 @@ public class Fachada implements IFachada{
 		
 	}
 
+//tipo equipamento
+
+
+	@Override
+	public void cadastrar(TipoEquipamento tipoEquip) {
+		controladorTipoEquipamento.cadastrar(tipoEquip);
+		
+	}
+
+	@Override
+	public void editar(TipoEquipamento tipoEquip) {
+		controladorTipoEquipamento.editar(tipoEquip);
+		
+	}
+
+	@Override
+	public void deletar(TipoEquipamento tipoEquip) {
+		controladorTipoEquipamento.deletar(tipoEquip);
+		
+	}
+
+	@Override
+	public ArrayList<TipoEquipamento> listarTipoEquipamento() {
+		
+		return controladorTipoEquipamento.listar();
+	}
+	
 
 	
 

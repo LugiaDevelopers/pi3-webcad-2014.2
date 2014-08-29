@@ -7,9 +7,9 @@ import br.com.webcad.negocio.administrador.Administrador;
 import br.com.webcad.negocio.coordenador.Coordenador;
 import br.com.webcad.negocio.curso.Curso;
 import br.com.webcad.negocio.equipamento.Equipamento;
-import br.com.webcad.negocio.equipamento.TipoEquipamento;
 import br.com.webcad.negocio.professor.Professor;
 import br.com.webcad.negocio.reserva.Reserva;
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
 
 public interface IFachada {
 
@@ -69,6 +69,14 @@ public interface IFachada {
 	
 	public abstract void alocarEquipamento(int idCurso, int idEquip, boolean alocado);
 	
+	public abstract void cadastrar(TipoEquipamento tipoEquip);
+
+	public abstract void editar(TipoEquipamento tipoEquip);
+
+	public abstract void deletar(TipoEquipamento tipoEquip);
+
+	public abstract ArrayList<TipoEquipamento> listarTipoEquipamento();
+	
 	// Professor
 	public abstract void cadastrar(Professor prof);
 
@@ -94,4 +102,6 @@ public interface IFachada {
 	public abstract ArrayList<Reserva> verificarReservas(String email);
 	
 	public abstract void desistirDaReserva(int idReserva);
+
+	
 }

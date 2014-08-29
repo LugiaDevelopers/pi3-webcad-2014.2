@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import br.com.webcad.negocio.curso.Curso;
 import br.com.webcad.negocio.equipamento.Equipamento;
-import br.com.webcad.negocio.equipamento.TipoEquipamento;
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
 
 public interface IRepositorioEquipamento {
 	

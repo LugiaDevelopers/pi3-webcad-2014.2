@@ -1,5 +1,7 @@
 package br.com.webcad.negocio.equipamento;
 
+import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
+
 public class Equipamento {
 
 	private int id;
