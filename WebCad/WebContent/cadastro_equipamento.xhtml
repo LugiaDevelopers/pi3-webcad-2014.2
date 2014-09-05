@@ -32,10 +32,8 @@
 						<label>Tipo do Equipamento</label>
 
 
-						<h:selectOneMenu id="tipoEquipamento"
-							value="#{equipamentoBM.tipoEquipamento.nome}">
-							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
-								var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
+						<h:selectOneMenu id="tipoEquipamento" value="#{equipamentoBM.tipoEquipamento.nome}" >
+							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
 						</h:selectOneMenu>
 
 						<label>Descrição do Equipamento</label>
@@ -90,7 +88,7 @@
 							<h:form>
 								<h:commandButton value="Editar" class="btn btn-info"
 									action="#{equipamentoBM.editar(equipamento)}" />
-								<h:commandButton value="Inativar" class="btn btn-danger"
+								<h:commandButton value="Excluir" class="btn btn-danger"
 									action="#{equipamentoBM.desabilitar(equipamento)}" />
 							</h:form>
 						</h:column>

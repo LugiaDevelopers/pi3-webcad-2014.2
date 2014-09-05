@@ -65,7 +65,7 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 		try {
 			Connection conexao = ConnectionFactory.createConnection();
 
-			String sql = "update usuario set Ativo = false where Id_user = "+adm.getId()+";";
+			String sql = "delete from usuario where Id_user = "+adm.getId()+";";
 
 			PreparedStatement comando = conexao.prepareStatement(sql);
 

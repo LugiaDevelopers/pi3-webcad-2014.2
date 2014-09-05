@@ -31,6 +31,7 @@ public interface IFachada {
 
 	public abstract boolean fazerLoginCordenador(String email, String senha);
 	
+	public abstract ArrayList<Coordenador> listarCoordenador();
 
 	// Curso
 	public abstract void cadastrar(Curso curso);

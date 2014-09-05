@@ -1,5 +1,7 @@
 package br.com.webcad.negocio.coordenador;
 
+import java.util.ArrayList;
+
 import br.com.webcad.dao.coordenador.IRepositorioCoordenador;
 import br.com.webcad.dao.coordenador.RepositorioCoordenador;
 
@@ -33,6 +35,10 @@ public class ControladorCoordenador {
 		}
 		
 		return false;
+	}
+	
+	public ArrayList<Coordenador> listarCoordenador(){
+		return repositorioCordenador.listarCoordenador();
 	}
 	
 }

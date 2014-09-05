@@ -3,18 +3,19 @@ package br.com.webcad.dao.coordenador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import br.com.webcad.dao.ConnectionFactory;
+import br.com.webcad.negocio.administrador.Administrador;
 import br.com.webcad.negocio.coordenador.Coordenador;
 
-public class RepositorioCoordenador implements IRepositorioCoordenador{
+public class RepositorioCoordenador implements IRepositorioCoordenador {
 
 	@Override
 	public String cadastrarCoordenador() {
 		try {
 			Connection conexao = ConnectionFactory.createConnection();
 
-			
 			// esse script sql deve ser alterado posteriormente apos tirar a
 			// duvida do id altoincrementavel e da senha varchar
 			String sql = "select * from usuario where Tipo = 'coordenador';";
@@ -22,14 +23,14 @@ public class RepositorioCoordenador implements IRepositorioCoordenador{
 			PreparedStatement comando = conexao.prepareStatement(sql);
 
 			ResultSet resultado = comando.executeQuery();
-				
-			if(resultado.first() == false){
+
+			if (resultado.first() == false) {
 				System.out.println("passou aqui");
 				sql = "insert into usuario (Nome, Email, Tipo, Senha, Matricula, Ativo) values ('Dota','dota@bol.com','coordenador','1234', 666999666, true);";
 				comando = conexao.prepareStatement(sql);
 				comando.execute();
 			}
-		
+
 			conexao.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,12 +64,45 @@ public class RepositorioCoordenador implements IRepositorioCoordenador{
 			}
 
 			conexao.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("erro no metodo de fazer login!!! ");
 		}
 		return false;
+	}
+
+	@Override
+	public ArrayList<Coordenador> listarCoordenador() {
+		ArrayList<Coordenador> coordEncontrado = new ArrayList<Coordenador>();
+		Coordenador coord;
+		try {
+			Connection conexao = ConnectionFactory.createConnection();
+
+			String sql = "select * from usuario where tipo = 'coordenador';";
+
+			PreparedStatement comando = conexao.prepareStatement(sql);
+
+			ResultSet resultado = comando.executeQuery();
+
+			while (resultado.next()) {
+
+				coord = new Coordenador(resultado.getInt("Id_user"),
+						resultado.getString("Nome"),
+						resultado.getString("Senha"),
+						resultado.getString("Email"),
+						resultado.getString("Tipo"), ""
+								+ resultado.getInt("Matricula"));
+				coordEncontrado.add(coord);
+			}
+
+			conexao.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao buscar administrador !!!!");
+		}
+		return coordEncontrado;
 	}
 
 }

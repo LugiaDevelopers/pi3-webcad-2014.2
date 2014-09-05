@@ -331,6 +331,12 @@ public class Fachada implements IFachada{
 		
 		return controladorTipoEquipamento.listar();
 	}
+
+	@Override
+	public ArrayList<Coordenador> listarCoordenador() {
+		
+		return controladorCordenador.listarCoordenador();
+	}
 	
 
 	

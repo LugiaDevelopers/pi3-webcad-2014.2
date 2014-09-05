@@ -93,6 +93,12 @@ public class RepositorioProfessor implements IRepositorioProfessor {
 
 			comando.execute();
 
+			sql = "delete from reserva where id_user = "+prof.getId()+";";
+			
+			comando = conexao.prepareStatement(sql);
+			
+			comando.execute();
+			
 			sql = "delete from usuario where id_user = "+prof.getId()+";";
 			
 			comando = conexao.prepareStatement(sql);
@@ -167,7 +173,7 @@ public class RepositorioProfessor implements IRepositorioProfessor {
 			}
 
 			conexao.close();
-
+			System.out.println("finalizou o fazerLoginProfessor com sucesso!!!");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("erro no metodo de fazer login!!! ");

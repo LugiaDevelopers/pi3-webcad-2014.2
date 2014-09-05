@@ -71,10 +71,15 @@ public class RepositorioEquipamento implements IRepositorioEquipamento {
 		try {
 			Connection conexao = ConnectionFactory.createConnection();
 
-			String sql = "update equipamento set Ativo = " + equip.isAtivo()
-					+ " where Id_equip = " + equip.getId() + ";";
+			String sql = "delete from reserva where Id_equip = " + equip.getId() + ";";
 
 			PreparedStatement comando = conexao.prepareStatement(sql);
+
+			comando.execute();
+			
+			sql = "delete from equipamento where Id_equip = " + equip.getId() + ";";
+
+			comando = conexao.prepareStatement(sql);
 
 			comando.execute();
 

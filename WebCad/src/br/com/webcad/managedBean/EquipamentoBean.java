@@ -158,11 +158,13 @@ public class EquipamentoBean {
 
 	public String editar(Equipamento equipamento) {
 		this.equipamento = equipamento;
+		this.tipoEquipamento = equipamento.getTipoEquipamento();
 		return "cadastro_equipamento";
 
 	}
 
 	private void inserirEquipamento() {
+		System.out.println(""+tipoEquipamento.getNome());
 		equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.cadastrar(equipamento);
 
@@ -173,8 +175,8 @@ public class EquipamentoBean {
 	}
 
 	private void editarEquipamento() {
-
-		equipamento.setTipoEquipamento(tipoEquipamento);
+		
+		//equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.editar(equipamento);
 		equipamentos = null;
 		equipamento = new Equipamento();
@@ -184,7 +186,7 @@ public class EquipamentoBean {
 	public void cadastraTipo() {
 
 		System.out.println(tipoEquipamento.getNome());
-		equipamento.setTipoEquipamento(tipoEquipamento);
+		//equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.cadastraTipo(equipamento);
 
 		equipamentos = null;
