@@ -2113,6 +2113,10 @@ table th[class*="span"],
   margin-left: 0;
 }
 
+.table > thead {
+	background: #C2C2B8;
+}
+
 .table td.span2,
 .table th.span2 {
   float: none;

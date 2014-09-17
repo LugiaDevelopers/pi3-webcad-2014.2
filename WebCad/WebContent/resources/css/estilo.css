@@ -163,6 +163,17 @@
 
 	
 }
+
+#TabelaEquipamentoFuncionando{
+	width: 49%;
+	float: left;
+}
+
+#TabelaEquipamentoQuebrado{
+	width: 49%;
+	float: right;
+}
+
 .left_home_adm{
 	float: left;
 	width: 45%;
@@ -170,6 +181,20 @@
 
 	
 }
+
+.tabela_esquerda{
+	float: left;
+	width: auto;
+	height: auto;
+}
+
+.tabela_direita{
+	float: right;
+	width: auto;
+	height: auto;
+}
+
+
 .right_home{
 	float: right;
 	width: 45%;
