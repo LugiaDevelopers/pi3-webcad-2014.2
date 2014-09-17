@@ -17,107 +17,122 @@
 	<h:panelGroup>
 
 		<div class="conteudo">
+
+
+
+			<h4 class="panel-title">Manutenção de Equipamentos</h4>
+
+			<div>
+				
+
+				<h:form>
+					<label>Tipo de Equipamento</label>
+
+					<h:selectOneMenu id="tipoEquipamento"
+						value="#{equipamentoBM.tipoEquipamento.nome}">
+						<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
+							var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
+					</h:selectOneMenu>
+
+					<br />
+					<h:commandButton class="btn btn-success" value="Filtrar"
+						action="#{equipamentoBM.filtrarEquipamentos}" />
+
+
+				</h:form>
+
 			
-			
-
-				<h4 class="panel-title">Manutenção de Equipamentos</h4>
-
-				<div >
-
-					<h:form>
-						<label>Tipo de Equipamento</label>
-
-						<h:selectOneMenu id="tipoEquipamento"
-							value="#{equipamentoBM.tipoEquipamento.nome}">
-							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
-								var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
-							</h:selectOneMenu>
-
-						<br />
-						<h:commandButton class="btn btn-success" value="Filtrar" action="#{equipamentoBM.filtrarEquipamentos}" />
-					
-						
-					</h:form>
-
-				</div>
-
 				
-				<div class="left_table">
-					
-					<h:dataTable id="TabelaEquipamentoFuncionando"
-						class="table bordered-table zebra-striped"
-						value="#{equipamentoBM.equipamentosFuncionando}"
-						var="equipamento">
-
-						
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Descrição" />
-							</f:facet>
-							<h:outputText value="#{equipamento.tipoEquipamento.nome} - #{equipamento.descricao}" />
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="N° de Série" />
-							</f:facet>
-							<h:outputText value="#{equipamento.numeroDeSerie}" />
-						</h:column>
-					
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Status: Funcionando" />
-							</f:facet>
-							<h:form>
-								<h:commandButton value="Enviar para Manutenção" class="btn btn-info" 
-								action="#{equipamentoBM.manutencao(equipamento)}" />
-				
-							</h:form>		
-						</h:column>
-					
-					</h:dataTable>
-					</div>
-				
-				<div class="right_table">
-						
-					<h:dataTable id="TabelaEquipamentoQuebrado"
-						class="table bordered-table zebra-striped"
-						value="#{equipamentoBM.equipamentosQuebrados}"
-						var="equipamento">
-
-						
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Descrição" />
-							</f:facet>
-							<h:outputText value="#{equipamento.tipoEquipamento.nome} - #{equipamento.descricao}" />
-						</h:column>
-						
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="N° de Série" />
-							</f:facet>
-							<h:outputText value="#{equipamento.numeroDeSerie}" />
-						</h:column>
-					
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Status: Quebrado" />
-							</f:facet>
-							<h:form>
-								<h:commandButton value="Retirar da Manutenção" class="btn btn-danger" 
-								action="#{equipamentoBM.manutencao(equipamento)}" />
-								
-							</h:form>		
-						</h:column>
-					
-					</h:dataTable>
 			</div>
-				
+	<div class="left_home">
+	
+		<!-- <div class="left_home_1">  -->
+
+				<h:dataTable id="TabelaEquipamentoQuebrado"
+					class="table > thead table-striped table-bordered"
+					value="#{equipamentoBM.equipamentosQuebrados}" var="equipamento">
+
+
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Descrição" />
+						</f:facet>
+						<h:outputText
+							value="#{equipamento.tipoEquipamento.nome} - #{equipamento.descricao}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="N° de Série" />
+						</f:facet>
+						<h:outputText value="#{equipamento.numeroDeSerie}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Status: Quebrado" />
+						</f:facet>
+						<h:form>
+							<h:commandButton value="Retirar da Manutenção"
+								class="btn btn-danger"
+								action="#{equipamentoBM.manutencao(equipamento)}" />
+
+						</h:form>
+					</h:column>
+
+				</h:dataTable>
+			<!--   </div> -->
+
+			<!--  <div class="left_home_1"> -->
+
+				<h:dataTable id="TabelaEquipamentoFuncionando"
+					class="table > thead table-striped table-bordered"
+					value="#{equipamentoBM.equipamentosFuncionando}" var="equipamento">
+
+
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Descrição" />
+						</f:facet>
+						<h:outputText
+							value="#{equipamento.tipoEquipamento.nome} - #{equipamento.descricao}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="N° de Série" />
+						</f:facet>
+						<h:outputText value="#{equipamento.numeroDeSerie}" />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Status: Funcionando" />
+						</f:facet>
+						<h:form>
+							<h:commandButton value="Enviar para Manutenção"
+								class="btn btn-info"
+								action="#{equipamentoBM.manutencao(equipamento)}" />
+
+						</h:form>
+					</h:column>
+
+				</h:dataTable>
+			<!--  </div> -->
+	
+	
+	<div class="clr"></div>
+	</div>
+
 			
-			
+
+
+
+
+
+
 		</div>
 
 	</h:panelGroup>
