@@ -8,20 +8,17 @@
 <h:head>
 	<title>Webcad - Locações Online</title>
 	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="resources/js/javascript.js">
-  
-  
-  </script>
+
 
 </h:head>
 
 <h:body>
 
 	<ui:include src="/topo_cordenador.xhtml"></ui:include>
-	
-	
+
+
 	<div class="clr"></div>
-	
+
 	<h:panelGroup>
 
 		<div class="conteudo">
@@ -38,26 +35,31 @@
 
 					<h:form id="formAdm" prependId="false">
 						<label>Nome</label>
-						<h:inputText id="nomeAdm" value="#{administradorMB.administrador.nome}" />
-						<h:message for="nomeAdm" /> <br/>
-						<label>Matricula</label>
-						<h:inputText id="matriculaAdm" value="#{administradorMB.administrador.matricula}"  />
-						<label>E-mail</label>
-						<h:inputText id="emailAdm" value="#{administradorMB.administrador.email}"  />
-						<label>Senha</label>
-						<h:inputText id="senhaAdm" value="#{administradorMB.administrador.senha}" />
+						<h:inputText id="nomeAdm"
+							value="#{administradorMB.administrador.nome}" />
+						<h:message for="nomeAdm" />
 						<br />
-						<h:commandButton class="btn btn-success" value="Salvar" action="#{administradorMB.salvar}" 
-						onclick="return validaAdministrador()"/>
+						<label>Matricula</label>
+						<h:inputText id="matriculaAdm"
+							value="#{administradorMB.administrador.matricula}" />
+						<label>E-mail</label>
+						<h:inputText id="emailAdm"
+							value="#{administradorMB.administrador.email}" />
+						<label>Senha</label>
+						<h:inputText id="senhaAdm"
+							value="#{administradorMB.administrador.senha}" />
+						<br />
+						<h:commandButton class="btn btn-success" value="Salvar"
+							action="#{administradorMB.salvar}"
+							onclick="return validaAdministrador()" />
 					</h:form>
 				</div>
 
 				<div class="right_home">
 
 					<h:dataTable id="TabelaDeAdministradoresCadastrados"
-						class="table table-striped table-bordered" value="#{administradorMB.administradores}"
-						var="administrador" 
-						>
+						class="table table-striped table-bordered"
+						value="#{administradorMB.administradores}" var="administrador">
 
 						<h:column>
 							<f:facet name="header">
@@ -85,8 +87,10 @@
 								<h:outputText value="Ação" />
 							</f:facet>
 							<h:form>
-								<h:commandButton value="Editar" class="btn btn-info" action="#{administradorMB.editar(administrador)}" />
-								<h:commandButton value="Excluir" class="btn btn-danger" action="#{administradorMB.desabilitar(administrador)}" />
+								<h:commandButton value="Editar" class="btn btn-info"
+									action="#{administradorMB.editar(administrador)}" />
+								<h:commandButton value="Excluir" class="btn btn-danger"
+									action="#{administradorMB.desabilitar(administrador)}" />
 							</h:form>
 						</h:column>
 
