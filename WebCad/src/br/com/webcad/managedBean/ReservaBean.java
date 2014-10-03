@@ -24,7 +24,8 @@ public class ReservaBean {
 	private IFachada fachada;
 	private ArrayList<Reserva> reservas;
 	private int chave = 0;
-
+	private int id = 0;
+	
 	private Date data1;
 	// = new Date();
 	// private SimpleDateFormat formataData = new
@@ -111,7 +112,7 @@ public class ReservaBean {
 				+ "\n" + sdf1.format(data1));
 
 		verificaLista();
-
+		id = 2;
 		chave = 1;
 		return "realizar_reserva";
 	}
@@ -125,10 +126,16 @@ public class ReservaBean {
 		reservas = null;
 
 		buscarEquipamentosDisponiveis(null, null, null);
+		
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+						"Reserva realizada com sucesso."));
+		id = 0;
 		return "realizar_reserva";
 	}
 
-	public String verificarReservas() {
+	public void verificarReservas() {
 		reservas = null;// add agora
 		emailN = (String) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("email");
@@ -140,7 +147,6 @@ public class ReservaBean {
 		// System.out.println(reservas.get(i).getEquipamento().getTipoEquipamento().getNome());
 		// }
 
-		return "home_professor";
 
 	}
 
@@ -148,9 +154,10 @@ public class ReservaBean {
 
 		System.out.println(idReserva);
 		fachada.desistirDaReserva(idReserva);
-		verificarReservas();
-
-		return null;
+		//verificarReservas();
+		id = 1;
+		return "home_professor?faces-redirect=true";
+		
 	}
 
 	public String listaLimpa() {
@@ -174,6 +181,32 @@ public class ReservaBean {
 			System.out.println("Verificando lista de reservas: "
 					+ reservas.get(i).getEquipamento().getTipoEquipamento()
 							.getNome());
+		}
+	}
+	
+	public void mensagemStatus(int tipo){
+		if(tipo == 1){
+			verificarReservas();
+		}
+		if(tipo == 2){
+			listaLimpa();
+		}
+		
+		if(id == 1){
+			id = 0;
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+							"Reserva cancelada com sucesso."));
+			
+		}
+		
+		if(id == 2){
+			id = 0;
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+							"Busca efetuada com sucesso."));
 		}
 	}
 

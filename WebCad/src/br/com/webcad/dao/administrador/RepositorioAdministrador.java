@@ -44,9 +44,9 @@ public class RepositorioAdministrador implements IRepositorioAdministrador {
 			String sql = "update usuario set Nome = '" + adm.getNome()
 					+ "', Email = '" + adm.getEmail() + "', Tipo = '"
 					+ adm.getTipo() + "', Senha = '" + adm.getSenha()
-					+ "', Matricula = " + adm.getSenha() + " where Id_user = "
+					+ "', Matricula = " + adm.getMatricula() + " where Id_user = "
 					+ adm.getId() + ";";
-
+			
 			PreparedStatement comando = conexao.prepareStatement(sql);
 
 			comando.execute();

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Webcad - Locações Online</title>
@@ -27,12 +28,22 @@
 				<div class="left_home_adm">
 
 					<h:form>
-						<label>Curso</label>
-						<h:inputText value="#{cursoBean.curso.nome}" id="nomeDoCurso" />
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
 
-						<br />
-						<h:commandButton class="btn btn-success" value="Cadastrar"
+						<h:panelGrid id="grid" columns="2" cellpadding="5">
+
+
+							<p:outputLabel for="nomeDoCurso" value="Curso: " />
+							<p:inputText id="nomeDoCurso" required="true" maxlength="34"
+								value="#{cursoBean.curso.nome}" />
+
+						</h:panelGrid>
+
+						<h:commandButton id="submitButton" update="grid"
+							class="btn btn-success" value="Cadastrar"
 							action="#{cursoBean.salvar}" />
+
 					</h:form>
 				</div>
 
@@ -58,8 +69,24 @@
 							<h:form>
 								<h:commandButton value="Editar" class="btn btn-info"
 									action="#{cursoBean.editar(curso)}" />
-								<h:commandButton value="Excluir" class="btn btn-danger"
-									action="#{cursoBean.desabilitar(curso)}" />
+
+
+								<p:commandButton value="Excluir" class="btn btn-danger"
+									action="#{cursoBean.desabilitar(curso)}">
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+
+
 							</h:form>
 						</h:column>
 

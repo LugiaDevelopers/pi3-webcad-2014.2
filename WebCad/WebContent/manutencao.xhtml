@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Manutenção de Equipamento | Administrador</title>
 	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
-
+</h:head>
 
 	<h:body>
 		<ui:include src="/topo_administrador.xhtml"></ui:include>
@@ -25,6 +26,9 @@
 
 
 					<h:form>
+						
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
 						<label>Tipo de Equipamento</label>
 
 						<h:selectOneMenu id="tipoEquipamento"
@@ -73,10 +77,23 @@
 								<h:outputText value="Status: Quebrado" />
 							</f:facet>
 							<h:form>
-								<h:commandButton value="Retirar da Manutenção"
-									class="btn btn-danger"
-									action="#{equipamentoBM.manutencao(equipamento)}" />
+								
 
+
+							<p:commandButton value="Retirar da Manutenção" class="btn btn-danger"
+									action="#{equipamentoBM.manutencao(equipamento)}" >
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode" >
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
 							</h:form>
 						</h:column>
 
@@ -111,9 +128,22 @@
 								<h:outputText value="Status: Funcionando" />
 							</f:facet>
 							<h:form>
-								<h:commandButton value="Enviar para Manutenção"
-									class="btn btn-info"
-									action="#{equipamentoBM.manutencao(equipamento)}" />
+								
+								<p:commandButton value="Enviar para Manutenção" class="btn btn-danger"
+									action="#{equipamentoBM.manutencao(equipamento)}" >
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode" >
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+								
 
 							</h:form>
 						</h:column>

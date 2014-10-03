@@ -30,6 +30,7 @@ public class ControladorAdministrador {
 		String retorno = "";
 		try {
 			repositorioAdministrador.editar(adm);
+			System.out.println("Editado com Sucesso!");
 			retorno = "Editado com Sucesso!";
 		} catch (Exception e) {
 			System.out.println("Erro ao Cadastrar!" + e);

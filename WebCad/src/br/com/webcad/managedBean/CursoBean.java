@@ -2,8 +2,10 @@ package br.com.webcad.managedBean;
 
 import java.util.ArrayList;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.webcad.negocio.Fachada;
 import br.com.webcad.negocio.IFachada;
@@ -64,13 +66,15 @@ public class CursoBean {
 	
 	private void inserirCurso(){
 		fachada.cadastrar(curso);
-		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastro efetuado com sucesso."));
+
 		cursos = null;
 		curso = new Curso();
 	}
 	
 	private void editarCurso(){
 		fachada.editar(curso);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Edição efetuada com sucesso."));
 		
 		cursos = null;
 		curso = new Curso();

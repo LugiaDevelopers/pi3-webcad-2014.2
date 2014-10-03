@@ -2,8 +2,10 @@ package br.com.webcad.managedBean;
 
 import java.util.ArrayList;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.swing.JOptionPane;
 
 import br.com.webcad.negocio.Fachada;
@@ -148,12 +150,15 @@ public class EquipamentoBean {
 		return "cadastro_equipamento";
 	}
 
-	public void desabilitar(Equipamento equipamento) {
+	public String desabilitar(Equipamento equipamento) {
 
 		fachada.desabilitar(equipamento);
 		equipamentos = null;
 		equipamento = new Equipamento();
 		System.out.println("test");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Equipamento excluido com sucesso."));
+
+		return "cadastro_equipamento?faces-redirect=true";
 	}
 
 	public String editar(Equipamento equipamento) {
@@ -168,6 +173,8 @@ public class EquipamentoBean {
 		equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.cadastrar(equipamento);
 
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastro efetuado com sucesso."));
+
 		equipamentos = null;
 		equipamento = new Equipamento();
 		tipoEquipamento = new TipoEquipamento();
@@ -181,6 +188,8 @@ public class EquipamentoBean {
 		equipamentos = null;
 		equipamento = new Equipamento();
 		tipoEquipamento = new TipoEquipamento();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Edição efetuada com sucesso."));
+
 	}
 
 	public void cadastraTipo() {
@@ -246,14 +255,16 @@ public class EquipamentoBean {
 		return "triagem_equipamento";
 	}
 
-	public void manutencao(Equipamento equip) {
+	public String manutencao(Equipamento equip) {
 		fachada.manutencao(equip);
 		filtrarEquipamentos();
+		
+		return "manutencao?faces-redirect=true";
 		
 	}
 
 	public void filtrarEquipamentos() {
-
+		boolean existe = false;
 		equipamentosPorNome = new ArrayList<Equipamento>();
 		ArrayList<Equipamento> todosEquipamentos = new ArrayList<Equipamento>();
 
@@ -263,10 +274,16 @@ public class EquipamentoBean {
 			if (todosEquipamentos.get(i).getTipoEquipamento().getNome()
 					.equals(tipoEquipamento.getNome())) {
 				equipamentosPorNome.add(todosEquipamentos.get(i));
+				existe = true;
 			}
+			
 		}
 		start=true;
 		System.err.println("entrou " + tipoEquipamento.getNome() + " "
 				+ equipamentosPorNome.size());
+		if(existe == false){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Info", "Não existe equipamento referente a esse tipo."));
+
+		}
 	}
 }

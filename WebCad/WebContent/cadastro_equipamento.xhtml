@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Webcad - Locações Online</title>
@@ -29,25 +30,47 @@
 				<div class="left_home_adm">
 
 					<h:form>
-						<label>Tipo do Equipamento</label>
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
+
+						<h:panelGrid id="grid" columns="2" cellpadding="5">
+							
+							<label>Tipo do Equipamento</label>
 
 
 						<h:selectOneMenu id="tipoEquipamento" value="#{equipamentoBM.tipoEquipamento.nome}" >
 							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
 						</h:selectOneMenu>
+							
 
-						<label>Descrição do Equipamento</label>
-						<h:inputText value="#{equipamentoBM.equipamento.descricao}"
-							id="descricaoEquipamento" />
-						<label>N° de série</label>
-						<h:inputText value="#{equipamentoBM.equipamento.numeroDeSerie}"
-							id="numeroSerie" />
-						<label>N° de tombamento</label>
-						<h:inputText value="#{equipamentoBM.equipamento.numeroTombamento}"
-							id="numeroTombamento" />
-						<br />
-						<h:commandButton class="btn btn-success" value="Salvar"
-							action="#{equipamentoBM.salvar}" />
+							<p:outputLabel for="descricaoEquipamento" value="Descrição do Equipamento: " />
+							<p:inputText id="descricaoEquipamento" required="true" maxlength="34"
+								value="#{equipamentoBM.equipamento.descricao}" />
+								
+								
+
+							<p:outputLabel for="numeroSerie" value="N° de série: " />
+							<p:inputText id="numeroSerie" required="true" maxlength="9"
+									value="#{equipamentoBM.equipamento.numeroDeSerie}"
+								validatorMessage="Informe apenas numeros!">
+								<f:validateRegex pattern="^[0-9]{1,20}" />
+							</p:inputText>
+
+							
+							<p:outputLabel for="numeroTombamento" value="N° de tombamento: " />
+							<p:inputText id="numeroTombamento" required="true" maxlength="9"
+								value="#{equipamentoBM.equipamento.numeroTombamento}"
+								validatorMessage="Informe apenas numeros!">
+								<f:validateRegex pattern="^[0-9]{1,20}" />
+							</p:inputText>
+							
+						</h:panelGrid>
+
+						<h:commandButton id="submitButton" update="grid"
+							class="btn btn-success" value="Salvar"
+							action="#{equipamentoBM.salvar}"
+							
+							 />
 					</h:form>
 
 				</div>
@@ -90,8 +113,22 @@
 							<h:form>
 								<h:commandButton value="Editar" class="btn btn-info"
 									action="#{equipamentoBM.editar(equipamento)}" />
-								<h:commandButton value="Excluir" class="btn btn-danger"
-									action="#{equipamentoBM.desabilitar(equipamento)}" />
+								
+									
+								<p:commandButton value="Excluir" class="btn btn-danger"
+									action="#{equipamentoBM.desabilitar(equipamento)}" >
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode" >
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>	
 							</h:form>
 						</h:column>
 

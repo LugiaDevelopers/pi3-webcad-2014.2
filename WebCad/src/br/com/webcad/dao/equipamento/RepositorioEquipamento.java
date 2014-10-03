@@ -27,8 +27,8 @@ public class RepositorioEquipamento implements IRepositorioEquipamento {
 			comando.setBoolean(2, true);
 			comando.setString(3, equip.getTipoEquipamento().getNome());
 			comando.setBoolean(4, false);
-			comando.setInt(5, equip.getNumeroDeSerie());
-			comando.setInt(6, equip.getNumeroTombamento());
+			comando.setInt(5, Integer.parseInt(equip.getNumeroDeSerie()));
+			comando.setInt(6, Integer.parseInt(equip.getNumeroTombamento()));
 			comando.setString(7, equip.getDescricao());
 			comando.setBoolean(8, true);
 

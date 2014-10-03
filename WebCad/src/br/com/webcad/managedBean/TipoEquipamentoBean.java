@@ -2,8 +2,10 @@ package br.com.webcad.managedBean;
 
 import java.util.ArrayList;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.webcad.negocio.Fachada;
 import br.com.webcad.negocio.IFachada;
@@ -50,11 +52,17 @@ public class TipoEquipamentoBean {
 		return "cadastro_tipo_equipamento";
 	}
 
-	public void excluir(TipoEquipamento tipoEquip) {
+	public String excluir(TipoEquipamento tipoEquip) {
 		fachada.deletar(tipoEquip);;
 		tipoEquipamentos = null;
 		tipoEquipamento = new TipoEquipamento();
 		
+		getTipoEquipamentos();
+		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Tipo de equipamento deletedo com sucesso."));
+
+		return "cadastro_tipo_equipamento?faces-redirect=true";
+
 	}
 
 	public String editar(TipoEquipamento tipoEquip) {
@@ -67,11 +75,14 @@ public class TipoEquipamentoBean {
 		
 		tipoEquipamentos = null;
 		tipoEquipamento = new TipoEquipamento();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastro efetuado com sucesso."));
+
 	}
 
 	public void editarTipoEquipamento() {
 		fachada.editar(tipoEquipamento);
 		tipoEquipamentos = null;
 		tipoEquipamento = new TipoEquipamento();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Edição efetuada com sucesso."));
 	}
 }

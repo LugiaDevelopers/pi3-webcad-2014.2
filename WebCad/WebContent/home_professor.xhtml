@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Webcad - Locações Online | Home Professor</title>
@@ -11,11 +12,12 @@
 </h:head>
 
 <h:body>
-		
+
 
 
 	<f:metadata>
-		<f:event type="preRenderView" listener="#{reservaBM.verificarReservas}" />
+		<f:event type="preRenderView"
+			listener="#{reservaBM.mensagemStatus(1)}" />
 	</f:metadata>
 
 	<ui:include src="/topo_professor.xhtml"></ui:include>
@@ -55,7 +57,8 @@
 					</div>
 
 					<div class="right_home">
-
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
 						<h3>Reservas Realizadas</h3>
 
 						<h:dataTable id="TabelaDeEquipamentosReservados"
@@ -88,9 +91,23 @@
 								<f:facet name="header">
 									<h:outputText value="Ação" />
 								</f:facet>
-								<!--  <h:commandButton value="Editar" class="btn btn-info" /> -->
-								<h:commandButton value="Cancelar" class="btn btn-danger"
-									action="#{reservaBM.desistirDaReserva(reserva.id)}" />
+
+								<p:commandButton value="Cancelar" class="btn btn-danger"
+									action="#{reservaBM.desistirDaReserva(reserva.id)}">
+									<p:confirm header="Confirmação"
+										message="Deseja mesmo cancelar a reserva?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+
 							</h:column>
 
 

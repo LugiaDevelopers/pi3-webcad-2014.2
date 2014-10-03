@@ -3,12 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
 
 <h:head>
 	<title>Webcad - Locações Online</title>
 	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
-	
+
 
 </h:head>
 
@@ -29,27 +31,47 @@
 
 				<div class="left_home_adm">
 
-					<h:form id="formProf" prependId="false">
-						<label>Nome</label>
-						<h:inputText id="nomeProfessor" value="#{professorBean.professor.nome}" />
-						<label>Matricula</label>
-						<h:inputText id="matriculaProfessor" value="#{professorBean.professor.matricula}"/>
-						<label>E-mail</label>
-						<h:inputText id="emailProfessor" value="#{professorBean.professor.email}"/>
-						<label>Senha</label>
-						<h:inputText id="senhaProfessor" value="#{professorBean.professor.senha}"/>
-						<br />
-						<h:commandButton class="btn btn-success" value="Salvar" action="#{professorBean.salvar}"
-						onclick="return validaProfessor()"/>
+					<h:form>
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
+
+						<h:panelGrid id="grid" columns="2" cellpadding="5">
+
+
+							<p:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome" required="true" maxlength="34"
+								value="#{professorBean.professor.nome}" />
+
+							<p:outputLabel for="matricula" value="Matricula:" />
+							<p:inputText id="matricula" required="true" maxlength="9"
+								value="#{professorBean.professor.matricula}"
+								validatorMessage="Informe apenas numeros!">
+								<f:validateRegex pattern="^[0-9]{1,20}" />
+							</p:inputText>
+
+							<p:outputLabel for="email" value="E-mail:" />
+							<p:inputText id="email" required="true" maxlength="37"
+								type="Email" value="#{professorBean.professor.email}" />
+
+							<p:outputLabel for="senha" value="Senha:" />
+							<p:password id="senha" required="true" maxlength="16"
+								redisplay="true" value="#{professorBean.professor.senha}" />
+
+
+						</h:panelGrid>
+
+						<h:commandButton id="submitButton" update="grid"
+							class="btn btn-success" value="Salvar"
+							action="#{professorBean.salvar}" />
 					</h:form>
+
 				</div>
 
 				<div class="right_home">
 
 					<h:dataTable id="TabelaDeProfessoresCadastrados"
 						class="table table-striped table-bordered"
-						value="#{professorBean.professores}"
-						var="professor" >
+						value="#{professorBean.professores}" var="professor">
 
 						<h:column>
 							<f:facet name="header">
@@ -77,8 +99,26 @@
 								<h:outputText value="Ação" />
 							</f:facet>
 							<h:form>
-								<h:commandButton value="Editar" class="btn btn-info" action="#{professorBean.editar(professor)}" />
-								<h:commandButton value="Excluir" class="btn btn-danger" action="#{professorBean.desabilitar(professor)}" />
+								<h:commandButton value="Editar" class="btn btn-info"
+									action="#{professorBean.editar(professor)}" />
+
+								<p:commandButton value="Excluir" class="btn btn-danger"
+									action="#{professorBean.desabilitar(professor)}">
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+
+
+
 							</h:form>
 						</h:column>
 

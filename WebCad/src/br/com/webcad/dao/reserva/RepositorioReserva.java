@@ -71,7 +71,7 @@ public class RepositorioReserva implements IRepositorioReserva{
 		try {
 			Connection conexao = ConnectionFactory.createConnection();
 
-			String sql = "select * from equipamento where id_curso = "+curso+" and nome = '"+nome+"';";
+			String sql = "select * from equipamento where id_curso = "+curso+" and nome = '"+nome+"' and manutencao = 0;";
 
 			PreparedStatement comando = conexao.prepareStatement(sql);
 

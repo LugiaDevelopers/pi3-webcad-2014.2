@@ -6,8 +6,8 @@ public class Equipamento {
 
 	private int id;
 	private String descricao;
-	private int numeroTombamento;
-	private int numeroDeSerie;
+	private String numeroTombamento;
+	private String numeroDeSerie;
 	private boolean ativo;
 	private boolean manutencao;
 	private TipoEquipamento tipoEquipamento;
@@ -16,11 +16,11 @@ public class Equipamento {
 	public Equipamento(int id, String descricao, int numeroTombamento,
 			int numeroDeSerie, boolean ativo, boolean manutencao,
 			boolean disponivelParaLocacao,TipoEquipamento tipoEquipamento) {
-		super();
+		
 		this.id = id;
 		this.descricao = descricao;
-		this.numeroTombamento = numeroTombamento;
-		this.numeroDeSerie = numeroDeSerie;
+		this.numeroTombamento = ""+numeroTombamento;
+		this.numeroDeSerie = ""+numeroDeSerie;
 		this.ativo = ativo;
 		this.manutencao = manutencao;
 		this.disponivelParaLocacao = disponivelParaLocacao;
@@ -47,19 +47,19 @@ public class Equipamento {
 		this.descricao = descricao;
 	}
 
-	public int getNumeroTombamento() {
+	public String getNumeroTombamento() {
 		return numeroTombamento;
 	}
 
-	public void setNumeroTombamento(int numeroTombamento) {
+	public void setNumeroTombamento(String numeroTombamento) {
 		this.numeroTombamento = numeroTombamento;
 	}
 
-	public int getNumeroDeSerie() {
+	public String getNumeroDeSerie() {
 		return numeroDeSerie;
 	}
 
-	public void setNumeroDeSerie(int numeroDeSerie) {
+	public void setNumeroDeSerie(String numeroDeSerie) {
 		this.numeroDeSerie = numeroDeSerie;
 	}
 

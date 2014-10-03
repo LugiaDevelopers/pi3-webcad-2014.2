@@ -105,4 +105,14 @@ public interface IFachada {
 	public abstract void desistirDaReserva(int idReserva);
 
 	
+	//usuario
+	
+
+	public abstract boolean verificaEmail(String email);
+
+	public abstract boolean verificaMatricula(int matricula);
+	
+	public abstract boolean verificaEmailDeterminado(String email, int id);
+	
+	public abstract boolean verificaMatriculaDeterminada(int matricula, int id);
 }

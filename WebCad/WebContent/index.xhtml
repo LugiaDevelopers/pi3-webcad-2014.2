@@ -3,15 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Webcad - Locações Online</title>
 	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
-
-
-
-
 
 </h:head>
 
@@ -22,26 +19,28 @@
 	<h:panelGroup>
 
 		<div class="conteudo">
+
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+
 			<div class="login">
 
 				<h3>Realize seu Login</h3>
 
-				<h:form id="form1" prependId="false" class="form_login">
-					<div class="control-group">
-						<label class="control-label" for="imputMatricula">Email</label>
-						<div class="controls">
-							<h:inputText value="#{autenticadorBean.usuario.email}"
-								id="imputEmail" placeholder="Email" />
-						</div>
-					</div>
+				<h:form>
 
-					<div class="control-group">
-						<label class="control-label" for="inputSenha">Senha</label>
-						<div class="controls">
-							<h:inputSecret value="#{autenticadorBean.usuario.senha}"
-								id="imputSenha" placeholder="Senha" />
-						</div>
-					</div>
+
+					<h:panelGrid id="grid" columns="1" cellpadding="3">
+
+						<p:outputLabel for="email" value="E-mail:" />
+						<p:inputText id="email" required="false" maxlength="37"
+							type="Email" value="#{autenticadorBean.usuario.email}" />
+
+						<p:outputLabel for="senha" value="Senha:" />
+						<p:password id="senha" required="false" maxlength="16" 
+							value="#{autenticadorBean.usuario.senha}" />
+
+					</h:panelGrid>
 
 					<h:commandButton value="      Acessar      "
 						class="btn btn-success" action="#{autenticadorBean.autentica}"
@@ -51,9 +50,14 @@
 					<br />
 					<br />
 
+
+				</h:form>
+
+				<h:form>
 					<h:commandLink value="Cadastrar usuario coordenador"
 						action="#{autenticadorBean.cadastrarCoordenador}" />
 				</h:form>
+
 
 			</div>
 

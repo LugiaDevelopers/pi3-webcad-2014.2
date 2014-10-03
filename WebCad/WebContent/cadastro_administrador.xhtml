@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Webcad - Locações Online</title>
 	<link href="resources/css/estilo.css" rel="stylesheet" type="text/css" />
-
 
 </h:head>
 
@@ -33,26 +33,43 @@
 
 				<div class="left_home_adm">
 
-					<h:form id="formAdm" prependId="false">
-						<label>Nome</label>
-						<h:inputText id="nomeAdm"
-							value="#{administradorMB.administrador.nome}" />
-						<h:message for="nomeAdm" />
-						<br />
-						<label>Matricula</label>
-						<h:inputText id="matriculaAdm"
-							value="#{administradorMB.administrador.matricula}" />
-						<label>E-mail</label>
-						<h:inputText id="emailAdm"
-							value="#{administradorMB.administrador.email}" />
-						<label>Senha</label>
-						<h:inputText id="senhaAdm"
-							value="#{administradorMB.administrador.senha}" />
-						<br />
-						<h:commandButton class="btn btn-success" value="Salvar"
+
+					<h:form>
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
+
+						<h:panelGrid id="grid" columns="2" cellpadding="5">
+
+
+							<p:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome" required="true" maxlength="34"
+								value="#{administradorMB.administrador.nome}" />
+
+							<p:outputLabel for="matricula" value="Matricula:" />
+							<p:inputText id="matricula" required="true" maxlength="9"
+								value="#{administradorMB.administrador.matricula}"
+								validatorMessage="Informe apenas numeros!">
+								<f:validateRegex pattern="^[0-9]{1,20}" />
+							</p:inputText>
+
+							<p:outputLabel for="email" value="E-mail:" />
+							<p:inputText id="email" required="true" maxlength="37" type="Email"
+								value="#{administradorMB.administrador.email}" />
+
+							<p:outputLabel for="senha" value="Senha:" />
+							<p:password id="senha" required="true" maxlength="16" redisplay="true" 
+								value="#{administradorMB.administrador.senha}" />
+							
+							
+						</h:panelGrid>
+
+						<h:commandButton id="submitButton" update="grid"
+							class="btn btn-success" value="Salvar"
 							action="#{administradorMB.salvar}"
-							onclick="return validaAdministrador()" />
+							 />
 					</h:form>
+
+
 				</div>
 
 				<div class="right_home">
@@ -89,8 +106,24 @@
 							<h:form>
 								<h:commandButton value="Editar" class="btn btn-info"
 									action="#{administradorMB.editar(administrador)}" />
-								<h:commandButton value="Excluir" class="btn btn-danger"
-									action="#{administradorMB.desabilitar(administrador)}" />
+
+
+
+								<p:commandButton value="Excluir" class="btn btn-danger"
+									action="#{administradorMB.desabilitar(administrador)}" >
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode" >
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+
 							</h:form>
 						</h:column>
 

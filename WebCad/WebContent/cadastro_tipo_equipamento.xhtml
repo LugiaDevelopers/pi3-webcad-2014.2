@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Webcad - Locações Online</title>
@@ -29,11 +30,21 @@
 				<div class="left_home_adm">
 
 					<h:form>
-						<label>Tipo de Equipamento</label>
-						<h:inputText value="#{tipoEquipamentoMB.tipoEquipamento.nome}" id="tipoEquipamento" />
-						
+
+						<p:messages id="messages" showDetail="true" autoUpdate="true"
+							closable="true" />
+						<h:panelGrid id="grid" columns="2" cellpadding="1">
+							<p:outputLabel for="tipoEquipamento" value="Tipo de Equipamento:" />
+							<p:inputText id="tipoEquipamento" required="true" maxlength="37"
+								value="#{tipoEquipamentoMB.tipoEquipamento.nome}"
+								validatorMessage="Informe apenas letras!">
+								<f:validateRegex pattern="[a-zA-Z]+" />
+							</p:inputText>
+
+						</h:panelGrid>
 						<br />
-						<h:commandButton class="btn btn-success" value="Salvar" action="#{tipoEquipamentoMB.salvar}" />
+						<h:commandButton class="btn btn-success" value="Salvar"
+							action="#{tipoEquipamentoMB.salvar}" />
 					</h:form>
 				</div>
 
@@ -41,8 +52,7 @@
 
 					<h:dataTable id="tabelaDeTipoDeCursosCadastrados"
 						class="table table-striped table-bordered"
-						value="#{tipoEquipamentoMB.tipoEquipamentos}"
-						var="equipamento" >
+						value="#{tipoEquipamentoMB.tipoEquipamentos}" var="equipamento">
 
 						<h:column>
 							<f:facet name="header">
@@ -51,16 +61,36 @@
 							<h:outputText value="#{equipamento.nome}" />
 						</h:column>
 
-						
+
 
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Ação" />
 							</f:facet>
 							<h:form>
-								<h:commandButton value="Editar" class="btn btn-info" action="#{tipoEquipamentoMB.editar(equipamento)}" />
-								<h:commandButton value="Excluir" class="btn btn-danger" action="#{tipoEquipamentoMB.excluir(equipamento)}"/>
-							</h:form>	
+								<h:commandButton value="Editar" class="btn btn-info"
+									action="#{tipoEquipamentoMB.editar(equipamento)}" />
+
+
+								<p:commandButton value="Excluir" class="btn btn-danger"
+									action="#{tipoEquipamentoMB.excluir(equipamento)}">
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
+
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+
+
+
+
+							</h:form>
 						</h:column>
 
 

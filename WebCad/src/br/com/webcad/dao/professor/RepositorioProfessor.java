@@ -59,7 +59,7 @@ public class RepositorioProfessor implements IRepositorioProfessor {
 			String sql = "update usuario set Nome = '" + prof.getNome()
 					+ "', Email = '" + prof.getEmail() + "', Tipo = '"
 					+ prof.getTipo() + "', Senha = '" + prof.getSenha()
-					+ "', Matricula = " + prof.getSenha() + " where Id_user = "
+					+ "', Matricula = " + prof.getMatricula() + " where Id_user = "
 					+ prof.getId() + ";";
 
 			PreparedStatement comando = conexao.prepareStatement(sql);

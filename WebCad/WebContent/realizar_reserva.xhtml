@@ -16,7 +16,8 @@
 
 
 	<f:metadata>
-		<f:event type="preRenderView" listener="#{reservaBM.listaLimpa}" />
+		<f:event type="preRenderView"
+			listener="#{reservaBM.mensagemStatus(2)}" />
 	</f:metadata>
 	<ui:include src="/topo_professor.xhtml"></ui:include>
 
@@ -25,6 +26,8 @@
 
 		<div class="conteudo">
 
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
 
 			<div class="clr"></div>
 
@@ -36,31 +39,45 @@
 				<div class="left_home_adm">
 
 					<h:form>
-						<label>Equipamento</label>
-						<h:selectOneMenu id="tipoEquipamento"
-							value="#{equipamentoBM.tipoEquipamento.nome}">
-							<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
-								var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
-						</h:selectOneMenu>
-						<label>Curso</label>
-						<h:selectOneMenu id="tipoCurso" value="#{cursoBean.curso.id}">
 
-							<f:selectItems value="#{cursoBean.cursos}" var="curso"
-								itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+						<h:panelGrid id="grid" columns="1" cellpadding="5">
 
-						</h:selectOneMenu>
+							<label>Equipamento</label>
+							<h:selectOneMenu id="tipoEquipamento"
+								value="#{equipamentoBM.tipoEquipamento.nome}">
+								<f:selectItems value="#{equipamentoBM.tipoEquipamentos}"
+									var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.nome}" />
+							</h:selectOneMenu>
+							
+							<label>Curso</label>
+							<h:selectOneMenu id="tipoCurso" value="#{cursoBean.curso.id}">
 
-						<br />
-						<label>Data da reserva </label>
-						<p:calendar id="mask" value="#{reservaBM.data1}"
-							pattern="dd/MM/yyyy" mask="true" />
-						<br />
-						<h:commandButton class="btn btn-success" value="Buscar"
-							action="#{reservaBM.buscarEquipamentosDisponiveis(equipamentoBM.tipoEquipamento.nome,cursoBean.curso.id,reservaBM.data1)}" />
+								<f:selectItems value="#{cursoBean.cursos}" var="curso"
+									itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+
+							</h:selectOneMenu>
+
+							<p:outputLabel for="dataReserva" value="Data da reserva " />
+							<p:calendar id="dataReserva" value="#{reservaBM.data1}"
+								pattern="dd/MM/yyyy" mask="true" required="true"
+								validatorMessage="Informe a data!" />
+
+
+							
+							<h:commandButton class="btn btn-success" value="Buscar"
+								action="#{reservaBM.buscarEquipamentosDisponiveis(equipamentoBM.tipoEquipamento.nome,cursoBean.curso.id,reservaBM.data1)}" />
+
+
+						</h:panelGrid>
+
+
 					</h:form>
 				</div>
 
 				<div class="right_home">
+
+
+					<h3>Equipamentos disponiveis</h3>
 
 					<h:dataTable id="TabelaDedisponiveis"
 						class="table table-striped table-bordered"

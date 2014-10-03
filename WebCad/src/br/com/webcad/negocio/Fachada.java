@@ -337,6 +337,31 @@ public class Fachada implements IFachada{
 		
 		return controladorCordenador.listarCoordenador();
 	}
+
+	//usuario
+	@Override
+	public boolean verificaEmail(String email) {
+		// TODO Auto-generated method stub
+		return controladorUsuario.verificaEmail(email);
+	}
+
+	@Override
+	public boolean verificaMatricula(int matricula) {
+		// TODO Auto-generated method stub
+		return controladorUsuario.verificaMatricula(matricula);
+	}
+
+	@Override
+	public boolean verificaEmailDeterminado(String email, int id) {
+		// TODO Auto-generated method stub
+		return controladorUsuario.verificaEmailDeterminado(email, id);
+	}
+
+	@Override
+	public boolean verificaMatriculaDeterminada(int matricula, int id) {
+		// TODO Auto-generated method stub
+		return controladorUsuario.verificaMatriculaDeterminada(matricula, id);
+	}
 	
 
 	

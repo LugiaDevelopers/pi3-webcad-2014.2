@@ -20,24 +20,21 @@ public class AutenticadorBean {
 	private IFachada fachada;
 	private Usuario usuario;
 	private FacesContext fc;
-	private ArrayList<Usuario> todosUsuarios; 
-	
-	
+	private ArrayList<Usuario> todosUsuarios;
+
 	public AutenticadorBean() {
 		usuario = new Usuario();
 		fachada = Fachada.getInstancia();
 		todosUsuarios = new ArrayList<Usuario>();
-		
+
 	}
 
 	public String autentica() {
-		
-		
+
 		System.out.println("entrou");
 		if (fachada.fazerLogin(usuario.getEmail(), usuario.getSenha()) == true) {
 
 			System.out.println("entrou professor");
-			
 
 			inserirUsuarioNaSessao();
 			return "/home_professor?faces-redirect=true";
@@ -46,23 +43,24 @@ public class AutenticadorBean {
 				usuario.getSenha()) == true) {
 
 			System.out.println("entrou administrador");
-			
+
 			inserirUsuarioNaSessao();
 			return "/home_administrador?faces-redirect=true";
 		} else if (fachada.fazerLoginCordenador(usuario.getEmail(),
 				usuario.getSenha()) == true) {
 
 			System.out.println("entrou coordenador");
-			
+
 			inserirUsuarioNaSessao();
 			return "/home_cordenador?faces-redirect=true";
 		} else {
 
-			FacesMessage fm = new FacesMessage("Email e/ou senha inválidos");
-			fm.setSeverity(FacesMessage.SEVERITY_ERROR);
-			fc.addMessage(null, fm);
-			fc.getExternalContext().getFlash().setKeepMessages(true);
-			return "/index?faces-redirect=true";
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro: ",
+							"Email e/ou senha inválidos"));
+
+			return "/index";
 		}
 
 	}
@@ -86,6 +84,8 @@ public class AutenticadorBean {
 	// cria usuario cordenador padrao!
 	public void cadastrarCoordenador() {
 		System.out.println("entrou no bean");
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Alerta! ", "Coordenador Cadastrado!"));
+		 
 		fachada.cadastrarCoordenador();
 	}
 
@@ -97,25 +97,24 @@ public class AutenticadorBean {
 
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
 				.put("email", usuario.getEmail());
-		
+
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap()
-		.put("tipo", tipoUsuario());
+				.put("tipo", tipoUsuario());
 
 	}
 
-	
-	private String tipoUsuario(){
+	private String tipoUsuario() {
 		todosUsuarios.addAll(fachada.listar());
 		todosUsuarios.addAll(fachada.listarProf());
 		todosUsuarios.addAll(fachada.listarCoordenador());
 		String tipo = " ";
 		for (int i = 0; i < todosUsuarios.size(); i++) {
-			if(todosUsuarios.get(i).getEmail().equals(usuario.getEmail())){
+			if (todosUsuarios.get(i).getEmail().equals(usuario.getEmail())) {
 				tipo = todosUsuarios.get(i).getTipo();
 			}
 		}
-		
+
 		return tipo;
 	}
-	
+
 }
