@@ -12,8 +12,18 @@ public class Reserva {
 	private Usuario usuario;
 	private String data;
 
+	
+	public Reserva(int id, Equipamento equipamento, String data, Usuario usuario) {
+		
+		this.id = id;
+		this.equipamento = equipamento;
+		this.data = data;
+		this.usuario = usuario;
+	}
+
+
 	public Reserva(int id, Equipamento equipamento, String data) {
-		super();
+		
 		this.id = id;
 		this.equipamento = equipamento;
 		this.data = data;

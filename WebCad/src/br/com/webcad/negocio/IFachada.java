@@ -103,6 +103,8 @@ public interface IFachada {
 	public abstract ArrayList<Reserva> verificarReservas(String email);
 	
 	public abstract void desistirDaReserva(int idReserva);
+	
+	public abstract ArrayList<Reserva> listarReserva();
 
 	
 	//usuario

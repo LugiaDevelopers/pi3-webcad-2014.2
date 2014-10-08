@@ -176,7 +176,7 @@
 
 .left_home_adm{
 	float: left;
-	width: 45%;
+	width: 25%;
 	margin-top: 10px;
 
 	
@@ -201,6 +201,7 @@
 	margin-top: 10px;
 }
 
+
 .left_table{
 	top:54.7%;
 	width: 48%;
@@ -223,3 +224,11 @@
 	width: 48%;
 
 }
+
+.right_home_date{
+	float: right;
+	width: 75%;
+	margin-top: 20px;
+}
+
+

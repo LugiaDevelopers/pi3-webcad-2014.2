@@ -21,37 +21,78 @@ public class ControleDeAcesso implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 
-		if (session.getAttribute("usuario") != null	|| req.getRequestURI().endsWith("index.xhtml")) {
-			
+		if (session.getAttribute("usuario") != null
+				|| req.getRequestURI().endsWith("index.xhtml")) {
+
 			String tipo = "" + session.getAttribute("tipo");
 
-			if ((req.getRequestURI().endsWith("realizar_reserva.xhtml") 
-					|| req.getRequestURI().endsWith("home_professor.xhtml"))
-					&& (tipo.equals("coordenador") 
-					|| tipo	.equals("administrador"))) {
+			if ((req.getRequestURI().endsWith("realizar_reserva.xhtml") || req
+					.getRequestURI().endsWith("home_professor.xhtml"))
+					&& (tipo.equals("coordenador"))) {
 				System.out.println("entrou na condição");
-				redireciona("pagina_erro.xhtml", response);
+				redireciona("home_cordenador.xhtml", response);
 			}
 
-			
-			if ((req.getRequestURI().endsWith("home_cordenador.xhtml") 
-					|| req.getRequestURI().endsWith("cadastro_administrador.xhtml"))
-					&& (tipo.equals("professor") || tipo.equals("administrador"))) {
-				redireciona("pagina_erro.xhtml", response);
+			if ((req.getRequestURI().endsWith("realizar_reserva.xhtml") || req
+					.getRequestURI().endsWith("home_professor.xhtml"))
+					&& (tipo.equals("administrador"))) {
+				System.out.println("entrou na condição");
+				redireciona("home_administrador.xhtml", response);
 			}
 
-			
+			if ((req.getRequestURI().endsWith("home_cordenador.xhtml") || req
+					.getRequestURI().endsWith("cadastro_administrador.xhtml"))
+					&& (tipo.equals("professor"))) {
+				redireciona("home_professor.xhtml", response);
+			}
+
+			if ((req.getRequestURI().endsWith("home_cordenador.xhtml") || req
+					.getRequestURI().endsWith("cadastro_administrador.xhtml"))
+					&& (tipo.equals("administrador"))) {
+				redireciona("home_administrador.xhtml", response);
+			}
+
 			if ((req.getRequestURI().endsWith("home_administrador.xhtml")
 					|| req.getRequestURI().endsWith("cadastro_professor.xhtml")
-					|| req.getRequestURI().endsWith("cadastro_equipamento.xhtml")
+					|| req.getRequestURI().endsWith(
+							"cadastro_equipamento.xhtml")
 					|| req.getRequestURI().endsWith("cadastro_curso.xhtml")
 					|| req.getRequestURI().endsWith("manutencao.xhtml")
-					|| req.getRequestURI().endsWith("triagem_equipamento.xhtml") 
-					|| req.getRequestURI().endsWith("cadastro_tipo_equipamento.xhtml"))
-					&& (tipo.equals("professor") || tipo.equals("coordenador"))) {
-				
-				redireciona("pagina_erro.xhtml", response);
-				
+					|| req.getRequestURI()
+							.endsWith("triagem_equipamento.xhtml") || req
+					.getRequestURI()
+					.endsWith("cadastro_tipo_equipamento.xhtml"))
+					&& tipo.equals("professor")) {
+
+				redireciona("home_professor.xhtml", response);
+
+			}
+			if ((req.getRequestURI().endsWith("home_administrador.xhtml")
+					|| req.getRequestURI().endsWith("cadastro_professor.xhtml")
+					|| req.getRequestURI().endsWith(
+							"cadastro_equipamento.xhtml")
+					|| req.getRequestURI().endsWith("cadastro_curso.xhtml")
+					|| req.getRequestURI().endsWith("manutencao.xhtml")
+					|| req.getRequestURI()
+							.endsWith("triagem_equipamento.xhtml") || req
+					.getRequestURI()
+					.endsWith("cadastro_tipo_equipamento.xhtml"))
+					&& tipo.equals("coordenador")) {
+
+				redireciona("home_cordenador.xhtml", response);
+
+			}
+			
+			if(req.getRequestURI().endsWith("index.xhtml") && tipo.equals("coordenador")){
+				redireciona("home_cordenador.xhtml", response);
+			}
+			
+			if(req.getRequestURI().endsWith("index.xhtml") && tipo.equals("administrador")){
+				redireciona("home_administrador.xhtml", response);
+			}
+			
+			if(req.getRequestURI().endsWith("index.xhtml") && tipo.equals("professor")){
+				redireciona("home_professor.xhtml", response);
 			}
 
 			chain.doFilter(request, response);

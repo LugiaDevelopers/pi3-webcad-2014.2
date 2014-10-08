@@ -15,4 +15,5 @@ public interface IRepositorioReserva {
 	public abstract void efetuarReserva(int idEquip ,String email, String nome, String data );
 	public abstract ArrayList<Reserva> verificarReservas(String email);
 	public abstract void desistirDaReserva(int idReserva);
+	public abstract ArrayList<Reserva> listarReserva();
 }

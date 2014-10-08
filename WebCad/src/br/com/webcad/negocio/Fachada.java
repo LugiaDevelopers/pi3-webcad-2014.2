@@ -362,6 +362,12 @@ public class Fachada implements IFachada{
 		// TODO Auto-generated method stub
 		return controladorUsuario.verificaMatriculaDeterminada(matricula, id);
 	}
+
+	@Override
+	public ArrayList<Reserva> listarReserva() {
+		// TODO Auto-generated method stub
+		return controladorReserva.listarReserva();
+	}
 	
 
 	

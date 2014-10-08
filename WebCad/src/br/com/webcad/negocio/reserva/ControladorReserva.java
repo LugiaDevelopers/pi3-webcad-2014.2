@@ -42,4 +42,8 @@ public class ControladorReserva {
 	public void dessistirDaReserva(int idReserva){
 		repositorioReserva.desistirDaReserva(idReserva);
 	}
+	
+	public ArrayList<Reserva> listarReserva(){
+		return repositorioReserva.listarReserva();
+	}
 }

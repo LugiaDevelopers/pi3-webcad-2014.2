@@ -9,6 +9,7 @@ import br.com.webcad.dao.ConnectionFactory;
 import br.com.webcad.negocio.equipamento.Equipamento;
 import br.com.webcad.negocio.reserva.Reserva;
 import br.com.webcad.negocio.tipoEquipamento.TipoEquipamento;
+import br.com.webcad.negocio.usuario.Usuario;
 
 public class RepositorioReserva implements IRepositorioReserva{
 
@@ -246,6 +247,43 @@ public class RepositorioReserva implements IRepositorioReserva{
 			e.printStackTrace();
 			System.out.println("Erro ao desistir da reserva !!!!");
 		}
+	}
+
+	@Override
+	public ArrayList<Reserva> listarReserva() {
+		ArrayList<Reserva> equipamentoReservados = new ArrayList<Reserva>();
+		Reserva reserva;
+		Equipamento equip;
+		TipoEquipamento tEquip;
+		Usuario usuario;
+		try {
+			Connection conexao = ConnectionFactory.createConnection();
+
+			String sql = "select * from reserva, usuario, equipamento where reserva.id_user = usuario.id_user and reserva.id_equip = equipamento.id_equip;";
+
+			PreparedStatement comando = conexao.prepareStatement(sql);
+
+			ResultSet resultado = comando.executeQuery();
+
+			while (resultado.next()) {
+				tEquip = new TipoEquipamento(resultado.getInt("Id_Equip"), resultado.getString("nome"), 0, 0);
+				equip = new Equipamento(resultado.getInt("Id_Equip"), resultado.getString("Descricao"), resultado.getInt("NTombamento"), resultado.getInt("Serial"), resultado.getBoolean("Ativo"), resultado.getBoolean("Manutencao"), resultado.getBoolean("DisponivelParaLocacao"), tEquip);
+				usuario = new Usuario(resultado.getInt("Id_user"), resultado.getString("Nome"), resultado.getString("Senha"), resultado.getString("Email"), resultado.getString("Tipo"), ""+resultado.getInt("Matricula"));
+				
+				reserva = new Reserva(resultado.getInt("Id_reserva"), equip, resultado.getString("Datareserva"),usuario);
+				
+				equipamentoReservados.add(reserva);
+				
+				
+			}
+
+			conexao.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao buscar equipamento !!!!");
+		}
+		return equipamentoReservados;
 	}
 
 	
