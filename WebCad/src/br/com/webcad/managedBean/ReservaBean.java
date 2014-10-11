@@ -150,13 +150,22 @@ public class ReservaBean {
 
 	}
 
-	public String desistirDaReserva(int idReserva) {
+	public String desistirDaReserva(String idReserva, boolean isAdm) {
 
+		
 		System.out.println(idReserva);
-		fachada.desistirDaReserva(idReserva);
+		fachada.desistirDaReserva(Integer.parseInt(idReserva));
 		//verificarReservas();
 		id = 1;
-		return "home_professor?faces-redirect=true";
+		if(isAdm == false){
+			
+			return "home_professor?faces-redirect=true";
+			
+		}else{
+			
+			return "home_administrador?faces-redirect=true";
+			
+		}
 		
 	}
 

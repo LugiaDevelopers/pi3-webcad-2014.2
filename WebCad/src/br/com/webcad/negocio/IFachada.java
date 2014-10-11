@@ -78,6 +78,8 @@ public interface IFachada {
 
 	public abstract ArrayList<TipoEquipamento> listarTipoEquipamento();
 	
+	public abstract Equipamento buscarEquipamentoPorNumeroDeTombo(String numeroDeSerie);
+	
 	// Professor
 	public abstract void cadastrar(Professor prof);
 

@@ -420,6 +420,46 @@ public class RepositorioEquipamento implements IRepositorioEquipamento {
 
 	}
 
+	@Override
+	public Equipamento buscarEquipamentoPorNumeroDeTombo(String numeroDeSerie) {
+		Equipamento equip = null;
+		TipoEquipamento tipoEquip;
+		try {
+			Connection conexao = ConnectionFactory.createConnection();
+
+			String sql = "select * from equipamento where ntombamento = '" + numeroDeSerie
+					+ "';";
+
+			PreparedStatement comando = conexao.prepareStatement(sql);
+
+			ResultSet resultado = comando.executeQuery();
+
+			while (resultado.next()) {
+
+				tipoEquip = new TipoEquipamento(resultado.getInt("Id_Equip"),
+						resultado.getString("Nome"), 0, 0);
+
+				equip = new Equipamento(resultado.getInt("Id_Equip"),
+						resultado.getString("Descricao"),
+						resultado.getInt("NTombamento"),
+						resultado.getInt("Serial"),
+						resultado.getBoolean("Ativo"),
+						resultado.getBoolean("Manutencao"),
+						resultado.getBoolean("DisponivelParaLocacao"),
+						tipoEquip);
+
+				
+			}
+
+			conexao.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Erro ao buscar equipamento !!!!");
+		}
+		return equip;
+	}
+
 	// chamadas para reserva de equipamento!
 
 }

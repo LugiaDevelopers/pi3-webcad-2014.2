@@ -6,7 +6,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.swing.JOptionPane;
 
 import br.com.webcad.negocio.Fachada;
 import br.com.webcad.negocio.IFachada;
@@ -32,6 +31,8 @@ public class EquipamentoBean {
 	private boolean start = false;
 
 	private int chaveControleQuantidadeAlocada = 0;
+
+	private String dados;
 
 	public EquipamentoBean() {
 		equipamento = new Equipamento();
@@ -156,7 +157,10 @@ public class EquipamentoBean {
 		equipamentos = null;
 		equipamento = new Equipamento();
 		System.out.println("test");
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Equipamento excluido com sucesso."));
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+						"Equipamento excluido com sucesso."));
 
 		return "cadastro_equipamento?faces-redirect=true";
 	}
@@ -169,11 +173,14 @@ public class EquipamentoBean {
 	}
 
 	private void inserirEquipamento() {
-		System.out.println(""+tipoEquipamento.getNome());
+		System.out.println("" + tipoEquipamento.getNome());
 		equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.cadastrar(equipamento);
 
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Cadastro efetuado com sucesso."));
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+						"Cadastro efetuado com sucesso."));
 
 		equipamentos = null;
 		equipamento = new Equipamento();
@@ -182,20 +189,23 @@ public class EquipamentoBean {
 	}
 
 	private void editarEquipamento() {
-		
-		//equipamento.setTipoEquipamento(tipoEquipamento);
+
+		// equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.editar(equipamento);
 		equipamentos = null;
 		equipamento = new Equipamento();
 		tipoEquipamento = new TipoEquipamento();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Edição efetuada com sucesso."));
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+						"Edição efetuada com sucesso."));
 
 	}
 
 	public void cadastraTipo() {
 
 		System.out.println(tipoEquipamento.getNome());
-		//equipamento.setTipoEquipamento(tipoEquipamento);
+		// equipamento.setTipoEquipamento(tipoEquipamento);
 		fachada.cadastraTipo(equipamento);
 
 		equipamentos = null;
@@ -258,9 +268,9 @@ public class EquipamentoBean {
 	public String manutencao(Equipamento equip) {
 		fachada.manutencao(equip);
 		filtrarEquipamentos();
-		
+
 		return "manutencao?faces-redirect=true";
-		
+
 	}
 
 	public void filtrarEquipamentos() {
@@ -276,14 +286,42 @@ public class EquipamentoBean {
 				equipamentosPorNome.add(todosEquipamentos.get(i));
 				existe = true;
 			}
-			
+
 		}
-		start=true;
+		start = true;
 		System.err.println("entrou " + tipoEquipamento.getNome() + " "
 				+ equipamentosPorNome.size());
-		if(existe == false){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Info", "Não existe equipamento referente a esse tipo."));
+		if (existe == false) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Info",
+							"Não existe equipamento referente a esse tipo."));
 
 		}
 	}
+
+	public String buscarEquipamentoPorNumeroDeTombo(String numeroDeSerie) {
+		System.out.println(numeroDeSerie);
+
+		Equipamento equip;
+
+		equip = fachada.buscarEquipamentoPorNumeroDeTombo(numeroDeSerie);
+
+		dados = "Nome: " + equip.getTipoEquipamento().getNome()
+				+ "<br/>Descrição: " + equip.getDescricao()
+				+ "<br/>Numero de Tombamento: " + equip.getNumeroTombamento()
+				+ "<br/>"+equip.getId();
+
+		return dados;
+
+	}
+
+	public String getDados() {
+		return dados;
+	}
+
+	public void setDados(String dados) {
+		this.dados = dados;
+	}
+
 }

@@ -20,4 +20,5 @@ public interface IRepositorioEquipamento {
 	public abstract ArrayList<Equipamento> equipamentosDisponiveis();
 	public abstract ArrayList<Equipamento> equipamentosAlocados(int idCurso);
 	public abstract void alocarEquipamento(int idCurso, int idEquip,boolean alocado);
+	public abstract Equipamento buscarEquipamentoPorNumeroDeTombo(String numeroDeSerie);
 }

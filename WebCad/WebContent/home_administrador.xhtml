@@ -43,6 +43,8 @@
 			day : 'Dia',
 			allDayText : 'Todo Dia'
 		};
+		
+		
 	</script>
 	<style type="text/css">
 .value {
@@ -119,24 +121,37 @@
 								oncomplete="PF('eventDialog').show();" />
 
 
-
 						</p:schedule>
 
 
 
 
 					</h:panelGrid>
-
+					
 					<p:dialog widgetVar="eventDialog" header="Informações da Reserva"
-						showEffect="clip" hideEffect="clip">
-						<h:panelGrid id="eventDetails" columns="2">
-							<h:outputLabel for="professor" value="Professor: " />
-							<p:inputText id="professor" value="#{scheduleView.event.title}"
-								required="true" />
+						showEffect="clip" hideEffect="clip"  width="250"  >
+						<h:panelGrid id="eventDetails" columns="1" >
+							<h:outputLabel for="nome" value="#{scheduleView.nome}" />
+							<h:outputLabel for="descricao" value="#{scheduleView.descricao}" />
+							<h:outputLabel for="nTombamento" value="#{scheduleView.numeroTombamento}" />
+							<p:commandButton value="Cancelar" class="ui-confirmdialog-yes"
+									action="#{reservaBM.desistirDaReserva(scheduleView.idReserva, true)}">
+									<p:confirm header="Confirmação" message="Deseja mesmo excluir?"
+										icon="ui-icon-alert" />
 
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="clip">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
 							
 						</h:panelGrid>
 					</p:dialog>
+					
 				</h:form>
 
 

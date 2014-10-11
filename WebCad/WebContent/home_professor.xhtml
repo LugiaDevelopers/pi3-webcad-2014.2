@@ -93,7 +93,7 @@
 								</f:facet>
 
 								<p:commandButton value="Cancelar" class="btn btn-danger"
-									action="#{reservaBM.desistirDaReserva(reserva.id)}">
+									action="#{reservaBM.desistirDaReserva(reserva.id, false)}">
 									<p:confirm header="Confirmação"
 										message="Deseja mesmo cancelar a reserva?"
 										icon="ui-icon-alert" />

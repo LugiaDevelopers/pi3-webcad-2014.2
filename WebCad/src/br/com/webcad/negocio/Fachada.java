@@ -1,7 +1,6 @@
 package br.com.webcad.negocio;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import br.com.webcad.negocio.administrador.Administrador;
 import br.com.webcad.negocio.administrador.ControladorAdministrador;
@@ -365,8 +364,14 @@ public class Fachada implements IFachada{
 
 	@Override
 	public ArrayList<Reserva> listarReserva() {
-		// TODO Auto-generated method stub
 		return controladorReserva.listarReserva();
+	}
+
+	@Override
+	public Equipamento buscarEquipamentoPorNumeroDeTombo(String numeroDeSerie) {
+		String[] tokens = numeroDeSerie.split(":");
+		
+		return controladorEquipamento.buscarEquipamentoPorNumeroDeTombo(tokens[tokens.length - 1]);
 	}
 	
 
